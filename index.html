@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Hand Kiss Animation</title>
+    <style>
+        :root {
+            --bg: #0a0f1a;
+            --surface-light: #f5ede4;
+            --surface-mid: #e8ddd2;
+            --surface-dark: #d9cdbf;
+            --skin-base: #e8bfa2;
+            --skin-light: #f2cfb5;
+            --skin-mid: #dfb38e;
+            --skin-shadow: #c89a75;
+            --skin-deep: #b8835e;
+            --nail-base: #3d0812;
+            --nail-mid: #5c0f1c;
+            --nail-high: #7a1828;
+            --nail-gloss: rgba(255, 220, 230, 0.25);
+            --gold-dk: #a07820;
+            --gold-md: #c9a435;
+            --gold-lt: #f0da8a;
+            --boy-skin-lt: #f0c8a0;
+            --boy-skin-md: #e0b080;
+            --boy-skin-sh: #c8956a;
+            --boy-hair: #2c1808;
+            --boy-hair-hi: #4a2a12;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse at 30% 40%, rgba(60, 40, 30, 0.2) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(30, 25, 35, 0.15) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 20%, rgba(20, 25, 40, 0.25) 0%, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: system-ui, sans-serif;
+            cursor: default;
+        }
+
+        .scene {
+            position: relative;
+            width: 580px;
+            height: 480px;
+        }
+
+        /* ============ AMBIENT LIGHT PARTICLES ============ */
+        .ambient-dust {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 220, 200, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: float-dust 7s ease-in-out infinite;
+        }
+        .ambient-dust:nth-child(1) {
+            top: 15%;
+            left: 20%;
+            animation-delay: 0s;
+            width: 2.5px;
+            height: 2.5px;
+        }
+        .ambient-dust:nth-child(2) {
+            top: 22%;
+            left: 35%;
+            animation-delay: 2.3s;
+            width: 1.8px;
+            height: 1.8px;
+        }
+        .ambient-dust:nth-child(3) {
+            top: 18%;
+            left: 50%;
+            animation-delay: 4.1s;
+            width: 2px;
+            height: 2px;
+        }
+        .ambient-dust:nth-child(4) {
+            top: 28%;
+            left: 42%;
+            animation-delay: 1.5s;
+            width: 1.5px;
+            height: 1.5px;
+        }
+        .ambient-dust:nth-child(5) {
+            top: 12%;
+            left: 28%;
+            animation-delay: 5.2s;
+            width: 2.2px;
+            height: 2.2px;
+        }
+
+        @keyframes float-dust {
+            0%,
+            100% {
+                opacity: 0.25;
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                opacity: 0.7;
+                transform: translateY(-14px) translateX(6px);
+            }
+            50% {
+                opacity: 0.35;
+                transform: translateY(-6px) translateX(-4px);
+            }
+            75% {
+                opacity: 0.6;
+                transform: translateY(-18px) translateX(3px);
+            }
+        }
+
+        /* ============ SURFACE ============ */
+        .surface {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 155px;
+            background:
+                /* subtle veining */
+                radial-gradient(ellipse at 25% 40%, rgba(180, 160, 140, 0.12) 0%, transparent 35%),
+                radial-gradient(ellipse at 55% 25%, rgba(190, 170, 150, 0.08) 0%, transparent 30%),
+                radial-gradient(ellipse at 70% 50%, rgba(175, 155, 135, 0.10) 0%, transparent 28%),
+                radial-gradient(ellipse at 40% 60%, rgba(185, 165, 145, 0.06) 0%, transparent 40%),
+                /* micro grain */
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(160, 140, 120, 0.03) 2px,
+                    rgba(160, 140, 120, 0.03) 3px),
+                repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(155, 135, 115, 0.025) 2px,
+                    rgba(155, 135, 115, 0.025) 3px),
+                /* base marble tone */
+                linear-gradient(185deg,
+                    #f7f0e8 0%, #efe5da 15%, #e9dcd0 35%,
+                    #e3d5c7 55%, #ddd0c0 75%, #d8caba 100%);
+            border-radius: 0 0 3px 3px;
+            box-shadow:
+                0 -4px 25px rgba(0, 0, 0, 0.55),
+                0 -1px 3px rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
+
+        .surface::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 35% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 35%, rgba(255, 255, 255, 0.06) 0%, transparent 45%);
+            border-radius: 0 0 3px 3px;
+            pointer-events: none;
+        }
+
+        /* ============ HAND SHADOW ============ */
+        .hand-shadow-main {
+            position: absolute;
+            width: 200px;
+            height: 90px;
+            background: rgba(0, 0, 0, 0.22);
+            border-radius: 50%;
+            bottom: 78px;
+            left: 40px;
+            z-index: 1;
+            filter: blur(22px);
+            transform: rotate(-6deg);
+        }
+        .hand-shadow-soft {
+            position: absolute;
+            width: 240px;
+            height: 110px;
+            background: rgba(0, 0, 0, 0.10);
+            border-radius: 50%;
+            bottom: 72px;
+            left: 30px;
+            z-index: 1;
+            filter: blur(35px);
+            transform: rotate(-5deg);
+        }
+
+        /* ============ HAND CONTAINER ============ */
+        .hand-container {
+            position: absolute;
+            width: 230px;
+            height: 290px;
+            left: 50px;
+            top: 28px;
+            z-index: 3;
+            transform: rotate(-7deg);
+        }
+
+        /* Wrist / Lower forearm */
+        .wrist {
+            position: absolute;
+            width: 68px;
+            height: 100px;
+            background: linear-gradient(178deg,
+                    #e8bfa2 0%, #e4b898 15%, #dcaa82 40%,
+                    #d49f75 60%, #c8946a 85%, #bf8a60 100%);
+            border-radius: 18px 18px 30px 30px;
+            bottom: -30px;
+            left: 78px;
+            box-shadow:
+                inset -7px 0 18px rgba(0, 0, 0, 0.07),
+                inset 5px 0 14px rgba(0, 0, 0, 0.04),
+                0 3px 8px rgba(0, 0, 0, 0.12);
+            z-index: 0;
+        }
+
+        /* Subtle wrist crease */
+        .wrist::after {
+            content: '';
+            position: absolute;
+            top: 22px;
+            left: 6px;
+            width: 56px;
+            height: 2px;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 1px;
+            filter: blur(2px);
+        }
+
+        /* Palm - back of hand */
+        .palm {
+            position: absolute;
+            width: 148px;
+            height: 135px;
+            background: linear-gradient(170deg,
+                    #f2cfb5 0%, #ecc6a8 12%, #e8bfa2 25%,
+                    #e3b692 45%, #dcaa82 65%, #d49f75 80%,
+                    #cc9468 95%, #c48a5e 100%);
+            border-radius: 50px 55px 48px 52px;
+            bottom: 32px;
+            left: 38px;
+            box-shadow:
+                inset -9px -12px 24px rgba(0, 0, 0, 0.09),
+                inset 7px -6px 18px rgba(0, 0, 0, 0.05),
+                inset 0 -2px 8px rgba(0, 0, 0, 0.04),
+                0 4px 18px rgba(0, 0, 0, 0.16);
+            z-index: 1;
+        }
+
+        /* Metacarpal ridge lines */
+        .palm::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            width: 108px;
+            height: 22px;
+            background:
+                radial-gradient(ellipse at 25% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.04) 0%, transparent 45%),
+                radial-gradient(ellipse at 75% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 48%);
+            border-radius: 50%;
+            filter: blur(5px);
+            pointer-events: none;
+        }
+
+        /* Subtle vein on back of hand */
+        .vein {
+            position: absolute;
+            z-index: 2;
+            pointer-events: none;
+            border-radius: 50%;
+            filter: blur(3px);
+        }
+        .vein-1 {
+            width: 38px;
+            height: 3px;
+            background: rgba(100, 140, 170, 0.12);
+            bottom: 95px;
+            left: 75px;
+            transform: rotate(-15deg);
+        }
+        .vein-2 {
+            width: 28px;
+            height: 2px;
+            background: rgba(90, 130, 160, 0.10);
+            bottom: 85px;
+            left: 95px;
+            transform: rotate(-8deg);
+        }
+
+        /* ============ FINGERS ============ */
+        .finger {
+            position: absolute;
+            background: linear-gradient(180deg,
+                    #ecc6a8 0%, #e8bfa2 18%, #e3b692 40%,
+                    #dcaa82 60%, #d49f75 78%, #c8946a 95%);
+            border-radius: 15px 15px 10px 10px;
+            z-index: 2;
+            box-shadow:
+                inset -3px 0 10px rgba(0, 0, 0, 0.05),
+                inset 2px 0 8px rgba(0, 0, 0, 0.03),
+                0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Joint crease lines */
+        .finger::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65%;
+            height: 1.5px;
+            background: rgba(0, 0, 0, 0.07);
+            border-radius: 1px;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Nail - realistic square shape with cuticle */
+        .finger::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 76%;
+            height: 26px;
+            background: linear-gradient(180deg,
+                    #7a1828 0%, #5c0f1c 30%, #4a0b14 55%,
+                    #3d0812 80%, #350710 100%);
+            border-radius: 3px 3px 8px 8px;
+            box-shadow:
+                0 1px 4px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 200, 210, 0.15),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        /* Glossy highlight stripe on nail */
+        .finger .nail-gloss {
+            position: absolute;
+            top: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30%;
+            height: 7px;
+            background: var(--nail-gloss);
+            border-radius: 2px;
+            z-index: 11;
+            pointer-events: none;
+        }
+
+        /* Individual fingers */
+        .finger-index {
+            width: 41px;
+            height: 128px;
+            bottom: 138px;
+            left: 52px;
+            transform: rotate(-5deg);
+            border-radius: 16px 16px 10px 10px;
+        }
+        .finger-index::before {
+            top: 38px;
+        }
+        .finger-index::after {
+            height: 27px;
+            width: 74%;
+        }
+
+        .finger-middle {
+            width: 43px;
+            height: 148px;
+            bottom: 148px;
+            left: 98px;
+            transform: rotate(0deg);
+            border-radius: 16px 16px 10px 10px;
+        }
+        .finger-middle::before {
+            top: 44px;
+        }
+        .finger-middle::after {
+            height: 29px;
+            width: 76%;
+        }
+
+        .finger-ring {
+            width: 39px;
+            height: 132px;
+            bottom: 140px;
+            left: 146px;
+            transform: rotate(5deg);
+            border-radius: 15px 15px 10px 10px;
+        }
+        .finger-ring::before {
+            top: 40px;
+        }
+        .finger-ring::after {
+            height: 27px;
+            width: 74%;
+        }
+
+        .finger-pinky {
+            width: 33px;
+            height: 108px;
+            bottom: 122px;
+            left: 190px;
+            transform: rotate(12deg);
+            border-radius: 14px 14px 9px 9px;
+        }
+        .finger-pinky::before {
+            top: 32px;
+        }
+        .finger-pinky::after {
+            height: 23px;
+            width: 72%;
+        }
+
+        /* Thumb */
+        .finger-thumb {
+            width: 46px;
+            height: 100px;
+            bottom: 48px;
+            left: 4px;
+            transform: rotate(-40deg);
+            border-radius: 18px 18px 12px 12px;
+            z-index: 0;
+            background: linear-gradient(180deg,
+                    #e8bfa2 0%, #e3b692 30%, #d49f75 60%, #c48a5e 100%);
+        }
+        .finger-thumb::before {
+            top: 30px;
+            width: 60%;
+        }
+        .finger-thumb::after {
+            height: 23px;
+            width: 74%;
+        }
+
+        /* ============ GOLD CHAIN RING ============ */
+        .gold-ring {
+            position: absolute;
+            width: 36px;
+            height: 10px;
+            bottom: 122px;
+            left: 147px;
+            transform: rotate(5deg);
+            z-index: 15;
+            pointer-events: none;
+            background:
+                /* chain link pattern */
+                repeating-linear-gradient(90deg,
+                    transparent 0px,
+                    transparent 1px,
+                    var(--gold-md) 1px,
+                    var(--gold-md) 2.5px,
+                    var(--gold-lt) 2.5px,
+                    var(--gold-lt) 3.5px,
+                    var(--gold-dk) 3.5px,
+                    var(--gold-dk) 5px,
+                    var(--gold-lt) 5px,
+                    var(--gold-lt) 6px,
+                    var(--gold-md) 6px,
+                    var(--gold-md) 7.5px,
+                    transparent 7.5px,
+                    transparent 8.5px);
+            border-radius: 50%;
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, 0.55),
+                0 0 6px rgba(200, 160, 50, 0.5),
+                inset 0 1px 1px rgba(255, 255, 255, 0.35);
+        }
+
+        .gold-ring::after {
+            content: '';
+            position: absolute;
+            top: 1.5px;
+            left: 4px;
+            width: 28px;
+            height: 2px;
+            background: rgba(255, 240, 210, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* ============ BOY CHARACTER ============ */
+        .boy {
+            position: absolute;
+            width: 140px;
+            height: 210px;
+            right: -190px;
+            top: 88px;
+            z-index: 10;
+            animation: boy-approach 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        /* Boy body */
+        .boy-body {
+            position: absolute;
+            width: 82px;
+            height: 108px;
+            background: linear-gradient(178deg,
+                    #355c8a 0%, #2a4a72 30%, #1e3a5f 65%, #182f4d 100%);
+            border-radius: 20px 20px 10px 10px;
+            bottom: 0;
+            left: 29px;
+            box-shadow:
+                inset -4px 0 14px rgba(0, 0, 0, 0.25),
+                inset 3px 0 10px rgba(0, 0, 0, 0.12),
+                0 3px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        /* Shirt collar */
+        .boy-body::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 16px;
+            background: linear-gradient(180deg, #4a7ab5 0%, #3a6295 100%);
+            border-radius: 8px 8px 2px 2px;
+            z-index: 2;
+        }
+
+        /* Boy head container */
+        .boy-head-container {
+            position: absolute;
+            width: 82px;
+            height: 88px;
+            top: 2px;
+            left: 29px;
+            z-index: 3;
+            transform-origin: 50% 90%;
+            animation: head-tilt-kiss 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        /* Boy head */
+        .boy-head {
+            position: absolute;
+            width: 78px;
+            height: 80px;
+            background: linear-gradient(175deg,
+                    #f5d0aa 0%, #f0c8a0 20%, #e8b88a 50%,
+                    #dca878 72%, #d09a68 100%);
+            border-radius: 48% 48% 46% 46% / 50% 50% 44% 44%;
+            top: 2px;
+            left: 2px;
+            box-shadow:
+                inset -6px -5px 16px rgba(0, 0, 0, 0.10),
+                inset 4px -3px 12px rgba(0, 0, 0, 0.06),
+                0 3px 10px rgba(0, 0, 0, 0.25);
+            z-index: 2;
+        }
+
+        /* Hair */
+        .boy-hair {
+            position: absolute;
+            width: 86px;
+            height: 48px;
+            background: linear-gradient(180deg,
+                    #3d2010 0%, #2c1808 55%, #1a0d04 100%);
+            border-radius: 44px 44px 8px 8px;
+            top: -6px;
+            left: -2px;
+            z-index: 4;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Hair texture strands */
+        .boy-hair::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 16px;
+            background: var(--boy-hair-hi);
+            border-radius: 50%;
+            top: -5px;
+            left: 16px;
+            opacity: 0.7;
+        }
+        .boy-hair::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 12px;
+            background: var(--boy-hair-hi);
+            border-radius: 50%;
+            top: -2px;
+            left: 44px;
+            opacity: 0.6;
+        }
+
+        /* Hair side tufts */
+        .hair-tuft {
+            position: absolute;
+            z-index: 5;
+            background: #2c1808;
+            border-radius: 50%;
+        }
+        .hair-tuft-left {
+            width: 14px;
+            height: 10px;
+            top: 8px;
+            left: -6px;
+            transform: rotate(-20deg);
+        }
+        .hair-tuft-right {
+            width: 12px;
+            height: 8px;
+            top: 10px;
+            right: -4px;
+            transform: rotate(15deg);
+        }
+
+        /* Eyes - soft & loving */
+        .eye {
+            position: absolute;
+            width: 17px;
+            height: 13px;
+            background: #fefefe;
+            border-radius: 50%;
+            top: 30px;
+            z-index: 6;
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.08),
+                inset 0 1px 2px rgba(0, 0, 0, 0.04);
+            overflow: visible;
+        }
+        .eye-left {
+            left: 16px;
+        }
+        .eye-right {
+            right: 16px;
+        }
+
+        /* Upper eyelid for softer expression */
+        .eye::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: rgba(200, 150, 120, 0.45);
+            border-radius: 50% 50% 0 0;
+            top: -2px;
+            left: 0;
+            z-index: 8;
+        }
+
+        /* Pupil - looking left toward hand */
+        .pupil {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle at 35% 30%, #4a4a4a 0%, #1a1a1a 65%, #000 100%);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            z-index: 7;
+        }
+
+        /* Sparkle in eye */
+        .pupil::after {
+            content: '';
+            position: absolute;
+            width: 3.5px;
+            height: 3.5px;
+            background: #fff;
+            border-radius: 50%;
+            top: 1px;
+            left: 1.5px;
+            z-index: 9;
+        }
+
+        /* Secondary sparkle */
+        .eye-sparkle {
+            position: absolute;
+            width: 2.5px;
+            height: 2.5px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 50%;
+            top: 1px;
+            z-index: 9;
+            pointer-events: none;
+        }
+        .eye-left .eye-sparkle {
+            left: 6px;
+        }
+        .eye-right .eye-sparkle {
+            left: 6px;
+        }
+
+        /* Blush */
+        .blush {
+            position: absolute;
+            width: 15px;
+            height: 9px;
+            background: rgba(235, 140, 145, 0.3);
+            border-radius: 50%;
+            top: 40px;
+            z-index: 5;
+            filter: blur(4px);
+        }
+        .blush-left {
+            left: 6px;
+        }
+        .blush-right {
+            right: 6px;
+        }
+
+        /* Nose */
+        .nose {
+            position: absolute;
+            width: 9px;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.07);
+            border-radius: 50%;
+            top: 43px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+        }
+
+        /* Mouth - puckers for kiss */
+        .mouth {
+            position: absolute;
+            width: 17px;
+            height: 12px;
+            background: #d48085;
+            border-radius: 50%;
+            top: 52px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            animation: mouth-pucker 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        /* Boy arm */
+        .boy-arm {
+            position: absolute;
+            width: 78px;
+            height: 24px;
+            background: linear-gradient(180deg,
+                    #f0c8a0 0%, #e8b88a 40%, #dca878 75%, #d09a68 100%);
+            border-radius: 13px;
+            top: 92px;
+            left: -48px;
+            z-index: 0;
+            transform-origin: right center;
+            animation: arm-reach 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+        }
+
+        .boy-hand-small {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background: radial-gradient(circle at 55% 40%, #f0c8a0 0%, #dca878 100%);
+            border-radius: 50%;
+            left: -18px;
+            top: -2px;
+            box-shadow:
+                inset -2px -1px 6px rgba(0, 0, 0, 0.08),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ============ KISS GLOW ============ */
+        .kiss-glow {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            background: radial-gradient(circle,
+                    rgba(255, 175, 190, 0.6) 0%,
+                    rgba(255, 140, 165, 0.25) 30%,
+                    transparent 70%);
+            border-radius: 50%;
+            top: 162px;
+            left: 168px;
+            z-index: 9;
+            opacity: 0;
+            pointer-events: none;
+            animation: glow-pulse 6s ease-in-out forwards;
+        }
+
+        /* ============ HEART ============ */
+        .heart-container {
+            position: absolute;
+            top: 118px;
+            left: 178px;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+            animation: heart-rise 6s ease-in-out forwards;
+        }
+
+        .heart-shape {
+            position: relative;
+            width: 26px;
+            height: 24px;
+            filter: drop-shadow(0 2px 4px rgba(200, 70, 90, 0.5));
+        }
+        .heart-shape::before,
+        .heart-shape::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 22px;
+            background: linear-gradient(180deg, #f07085 0%, #e04560 100%);
+            border-radius: 15px 15px 0 0;
+            top: 0;
+        }
+        .heart-shape::before {
+            left: 7px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart-shape::after {
+            left: 4px;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        /* ============ ANIMATIONS ============ */
+        @keyframes boy-approach {
+            0% {
+                right: -190px;
+                transform: translateY(0) rotate(0deg);
+            }
+            30% {
+                right: 42px;
+                transform: translateY(0) rotate(0deg);
+            }
+            42% {
+                right: 34px;
+                transform: translateY(4px) rotate(-2deg);
+            }
+            55% {
+                right: 28px;
+                transform: translateY(10px) rotate(-5deg);
+            }
+            68% {
+                right: 26px;
+                transform: translateY(15px) rotate(-6deg);
+            }
+            82% {
+                right: 26px;
+                transform: translateY(16px) rotate(-6deg);
+            }
+            100% {
+                right: 26px;
+                transform: translateY(16px) rotate(-6deg);
+            }
+        }
+
+        @keyframes head-tilt-kiss {
+            0% {
+                transform: rotate(0deg) translateY(0);
+            }
+            30% {
+                transform: rotate(0deg) translateY(0);
+            }
+            42% {
+                transform: rotate(-10deg) translateY(5px);
+            }
+            55% {
+                transform: rotate(-22deg) translateY(12px);
+            }
+            68% {
+                transform: rotate(-30deg) translateY(17px);
+            }
+            82% {
+                transform: rotate(-32deg) translateY(18px);
+            }
+            100% {
+                transform: rotate(-32deg) translateY(18px);
+            }
+        }
+
+        @keyframes arm-reach {
+            0% {
+                transform: rotate(8deg);
+            }
+            30% {
+                transform: rotate(8deg);
+            }
+            42% {
+                transform: rotate(-15deg);
+            }
+            55% {
+                transform: rotate(-32deg);
+            }
+            68% {
+                transform: rotate(-42deg);
+            }
+            82% {
+                transform: rotate(-44deg);
+            }
+            100% {
+                transform: rotate(-44deg);
+            }
+        }
+
+        @keyframes mouth-pucker {
+            0% {
+                width: 17px;
+                height: 12px;
+                border-radius: 50%;
+            }
+            30% {
+                width: 17px;
+                height: 12px;
+                border-radius: 50%;
+            }
+            42% {
+                width: 14px;
+                height: 10px;
+                border-radius: 50%;
+            }
+            55% {
+                width: 11px;
+                height: 9px;
+                border-radius: 50%;
+            }
+            68% {
+                width: 10px;
+                height: 8px;
+                border-radius: 50%;
+            }
+            82% {
+                width: 10px;
+                height: 8px;
+                border-radius: 50%;
+            }
+            100% {
+                width: 10px;
+                height: 8px;
+                border-radius: 50%;
+            }
+        }
+
+        @keyframes glow-pulse {
+            0% {
+                opacity: 0;
+                transform: scale(0.4);
+            }
+            55% {
+                opacity: 0;
+                transform: scale(0.4);
+            }
+            62% {
+                opacity: 0.9;
+                transform: scale(2.8);
+            }
+            70% {
+                opacity: 0.5;
+                transform: scale(2.0);
+            }
+            80% {
+                opacity: 0.2;
+                transform: scale(3.2);
+            }
+            90% {
+                opacity: 0.05;
+                transform: scale(4.0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(5.0);
+            }
+        }
+
+        @keyframes heart-rise {
+            0% {
+                opacity: 0;
+                transform: scale(0.15) translateY(0);
+            }
+            56% {
+                opacity: 0;
+                transform: scale(0.15) translateY(0);
+            }
+            64% {
+                opacity: 1;
+                transform: scale(1.5) translateY(-8px);
+            }
+            72% {
+                opacity: 0.9;
+                transform: scale(1.15) translateY(-18px);
+            }
+            84% {
+                opacity: 0.65;
+                transform: scale(1.0) translateY(-30px);
+            }
+            95% {
+                opacity: 0.35;
+                transform: scale(0.9) translateY(-38px);
+            }
+            100% {
+                opacity: 0.15;
+                transform: scale(0.85) translateY(-44px);
+            }
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 640px) {
+            .scene {
+                transform: scale(0.72);
+            }
+        }
+        @media (max-width: 420px) {
+            .scene {
+                transform: scale(0.5);
+            }
+        }
+        @media (min-width: 1200px) {
+            .scene {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <!-- Ambient dust motes -->
+        <div class="ambient-dust"></div>
+        <div class="ambient-dust"></div>
+        <div class="ambient-dust"></div>
+        <div class="ambient-dust"></div>
+        <div class="ambient-dust"></div>
+
+        <!-- Surface -->
+        <div class="surface"></div>
+
+        <!-- Hand shadows -->
+        <div class="hand-shadow-soft"></div>
+        <div class="hand-shadow-main"></div>
+
+        <!-- Woman's hand -->
+        <div class="hand-container">
+            <div class="wrist"></div>
+            <div class="palm"></div>
+            <div class="vein vein-1"></div>
+            <div class="vein vein-2"></div>
+
+            <!-- Fingers with nails -->
+            <div class="finger finger-index">
+                <div class="nail-gloss"></div>
+            </div>
+            <div class="finger finger-middle">
+                <div class="nail-gloss"></div>
+            </div>
+            <div class="finger finger-ring">
+                <div class="nail-gloss"></div>
+            </div>
+            <div class="finger finger-pinky">
+                <div class="nail-gloss"></div>
+            </div>
+            <div class="finger finger-thumb">
+                <div class="nail-gloss"></div>
+            </div>
+
+            <!-- Gold chain ring -->
+            <div class="gold-ring"></div>
+        </div>
+
+        <!-- Kiss glow -->
+        <div class="kiss-glow"></div>
+
+        <!-- Heart -->
+        <div class="heart-container">
+            <div class="heart-shape"></div>
+        </div>
+
+        <!-- Boy character -->
+        <div class="boy">
+            <div class="boy-body"></div>
+            <div class="boy-arm">
+                <div class="boy-hand-small"></div>
+            </div>
+            <div class="boy-head-container">
+                <div class="boy-head">
+                    <div class="boy-hair"></div>
+                    <div class="hair-tuft hair-tuft-left"></div>
+                    <div class="hair-tuft hair-tuft-right"></div>
+                    <div class="eye eye-left">
+                        <div class="pupil"></div>
+                        <div class="eye-sparkle"></div>
+                    </div>
+                    <div class="eye eye-right">
+                        <div class="pupil"></div>
+                        <div class="eye-sparkle"></div>
+                    </div>
+                    <div class="blush blush-left"></div>
+                    <div class="blush blush-right"></div>
+                    <div class="nose"></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
