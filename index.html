@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hand Kiss - Every Finger</title>
+    <title>Hand Kiss - Every Finger (Fixed Alignment)</title>
     <style>
         :root {
             --bg: #080d18;
@@ -57,7 +57,7 @@
             height: 540px;
         }
 
-        /* ============ DUST MOTES ============ */
+        /* ============ DUST ============ */
         .dust {
             position: absolute;
             border-radius: 50%;
@@ -66,1167 +66,372 @@
             animation: dust-float 8s ease-in-out infinite;
             background: rgba(255, 220, 200, 0.45);
         }
-        .dust:nth-child(1) {
-            width: 3px;
-            height: 3px;
-            top: 12%;
-            left: 22%;
-            animation-delay: 0s;
-        }
-        .dust:nth-child(2) {
-            width: 2px;
-            height: 2px;
-            top: 18%;
-            left: 38%;
-            animation-delay: 2.5s;
-        }
-        .dust:nth-child(3) {
-            width: 2.5px;
-            height: 2.5px;
-            top: 25%;
-            left: 48%;
-            animation-delay: 4.8s;
-        }
-        .dust:nth-child(4) {
-            width: 1.8px;
-            height: 1.8px;
-            top: 15%;
-            left: 55%;
-            animation-delay: 1.3s;
-        }
-        .dust:nth-child(5) {
-            width: 2.2px;
-            height: 2.2px;
-            top: 20%;
-            left: 30%;
-            animation-delay: 5.7s;
-        }
+        .dust:nth-child(1) { width:3px; height:3px; top:12%; left:22%; animation-delay:0s; }
+        .dust:nth-child(2) { width:2px; height:2px; top:18%; left:38%; animation-delay:2.5s; }
+        .dust:nth-child(3) { width:2.5px; height:2.5px; top:25%; left:48%; animation-delay:4.8s; }
+        .dust:nth-child(4) { width:1.8px; height:1.8px; top:15%; left:55%; animation-delay:1.3s; }
+        .dust:nth-child(5) { width:2.2px; height:2.2px; top:20%; left:30%; animation-delay:5.7s; }
 
         @keyframes dust-float {
-            0%,
-            100% {
-                opacity: 0.2;
-                transform: translate(0, 0);
-            }
-            25% {
-                opacity: 0.7;
-                transform: translate(8px, -16px);
-            }
-            50% {
-                opacity: 0.3;
-                transform: translate(-5px, -8px);
-            }
-            75% {
-                opacity: 0.6;
-                transform: translate(4px, -20px);
-            }
+            0%,100%{ opacity:0.2; transform:translate(0,0); }
+            25%{ opacity:0.7; transform:translate(8px,-16px); }
+            50%{ opacity:0.3; transform:translate(-5px,-8px); }
+            75%{ opacity:0.6; transform:translate(4px,-20px); }
         }
 
         /* ============ SURFACE ============ */
         .surface {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 160px;
+            bottom:0; left:0; width:100%; height:160px;
             background:
-                radial-gradient(ellipse at 25% 35%, rgba(180, 160, 140, 0.10) 0%, transparent 35%),
-                radial-gradient(ellipse at 55% 20%, rgba(190, 170, 150, 0.07) 0%, transparent 30%),
-                radial-gradient(ellipse at 70% 45%, rgba(175, 155, 135, 0.09) 0%, transparent 28%),
-                repeating-linear-gradient(0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(160, 140, 120, 0.025) 2px,
-                    rgba(160, 140, 120, 0.025) 3px),
-                repeating-linear-gradient(90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(155, 135, 115, 0.02) 2px,
-                    rgba(155, 135, 115, 0.02) 3px),
-                linear-gradient(185deg,
-                    #f7f0e8 0%, #efe5da 15%, #e9dcd0 35%,
-                    #e3d5c7 55%, #ddd0c0 75%, #d8caba 100%);
-            border-radius: 0 0 3px 3px;
-            box-shadow: 0 -4px 28px rgba(0, 0, 0, 0.55), 0 -1px 3px rgba(0, 0, 0, 0.3);
-            z-index: 0;
+                radial-gradient(ellipse at 25% 35%, rgba(180,160,140,0.10) 0%, transparent 35%),
+                radial-gradient(ellipse at 55% 20%, rgba(190,170,150,0.07) 0%, transparent 30%),
+                radial-gradient(ellipse at 70% 45%, rgba(175,155,135,0.09) 0%, transparent 28%),
+                repeating-linear-gradient(0deg,transparent,transparent 2px, rgba(160,140,120,0.025) 2px, rgba(160,140,120,0.025) 3px),
+                repeating-linear-gradient(90deg,transparent,transparent 2px, rgba(155,135,115,0.02) 2px, rgba(155,135,115,0.02) 3px),
+                linear-gradient(185deg, #f7f0e8 0%, #efe5da 15%, #e9dcd0 35%, #e3d5c7 55%, #ddd0c0 75%, #d8caba 100%);
+            border-radius:0 0 3px 3px;
+            box-shadow:0 -4px 28px rgba(0,0,0,0.55), 0 -1px 3px rgba(0,0,0,0.3);
+            z-index:0;
         }
         .surface::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse at 35% 18%, rgba(255, 255, 255, 0.09) 0%, transparent 48%),
-                radial-gradient(ellipse at 60% 32%, rgba(255, 255, 255, 0.05) 0%, transparent 42%);
-            border-radius: 0 0 3px 3px;
-            pointer-events: none;
+            content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+            background:radial-gradient(ellipse at 35% 18%, rgba(255,255,255,0.09) 0%, transparent 48%),
+                       radial-gradient(ellipse at 60% 32%, rgba(255,255,255,0.05) 0%, transparent 42%);
+            border-radius:0 0 3px 3px; pointer-events:none;
         }
 
         /* ============ HAND SHADOWS ============ */
         .hand-shadow-main {
-            position: absolute;
-            width: 220px;
-            height: 100px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 50%;
-            bottom: 82px;
-            left: 50px;
-            z-index: 1;
-            filter: blur(24px);
-            transform: rotate(-6deg);
+            position:absolute; width:220px; height:100px; background:rgba(0,0,0,0.2);
+            border-radius:50%; bottom:82px; left:50px; z-index:1; filter:blur(24px); transform:rotate(-6deg);
         }
         .hand-shadow-soft {
-            position: absolute;
-            width: 260px;
-            height: 120px;
-            background: rgba(0, 0, 0, 0.09);
-            border-radius: 50%;
-            bottom: 76px;
-            left: 38px;
-            z-index: 1;
-            filter: blur(38px);
-            transform: rotate(-5deg);
+            position:absolute; width:260px; height:120px; background:rgba(0,0,0,0.09);
+            border-radius:50%; bottom:76px; left:38px; z-index:1; filter:blur(38px); transform:rotate(-5deg);
         }
 
-        /* ============ HAND CONTAINER ============ */
+        /* ============ HAND ============ */
         .hand-container {
-            position: absolute;
-            width: 310px;
-            height: 380px;
-            left: 55px;
-            top: 18px;
-            z-index: 3;
-            transform: rotate(-6deg);
+            position:absolute; width:310px; height:380px; left:55px; top:18px; z-index:3; transform:rotate(-6deg);
         }
-
         .wrist {
-            position: absolute;
-            width: 88px;
-            height: 125px;
-            background: linear-gradient(178deg,
-                    #e8bfa2 0%, #e4b898 15%, #dcaa82 40%,
-                    #d49f75 60%, #c8946a 85%, #bf8a60 100%);
-            border-radius: 20px 20px 34px 34px;
-            bottom: -38px;
-            left: 105px;
-            box-shadow: inset -7px 0 18px rgba(0, 0, 0, 0.07), inset 5px 0 14px rgba(0, 0, 0, 0.04),
-                0 3px 8px rgba(0, 0, 0, 0.12);
-            z-index: 0;
+            position:absolute; width:88px; height:125px;
+            background:linear-gradient(178deg, #e8bfa2 0%, #e4b898 15%, #dcaa82 40%, #d49f75 60%, #c8946a 85%, #bf8a60 100%);
+            border-radius:20px 20px 34px 34px; bottom:-38px; left:105px;
+            box-shadow:inset -7px 0 18px rgba(0,0,0,0.07), inset 5px 0 14px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.12); z-index:0;
         }
         .wrist::after {
-            content: '';
-            position: absolute;
-            top: 28px;
-            left: 8px;
-            width: 72px;
-            height: 2px;
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 1px;
-            filter: blur(2px);
+            content:''; position:absolute; top:28px; left:8px; width:72px; height:2px;
+            background:rgba(0,0,0,0.05); border-radius:1px; filter:blur(2px);
         }
-
         .palm {
-            position: absolute;
-            width: 195px;
-            height: 175px;
-            background: linear-gradient(170deg,
-                    #f2cfb5 0%, #ecc6a8 12%, #e8bfa2 25%,
-                    #e3b692 45%, #dcaa82 65%, #d49f75 80%,
-                    #cc9468 95%, #c48a5e 100%);
-            border-radius: 55px 60px 50px 55px;
-            bottom: 40px;
-            left: 50px;
-            box-shadow: inset -9px -12px 24px rgba(0, 0, 0, 0.09),
-                inset 7px -6px 18px rgba(0, 0, 0, 0.05),
-                0 4px 18px rgba(0, 0, 0, 0.16);
-            z-index: 1;
+            position:absolute; width:195px; height:175px;
+            background:linear-gradient(170deg, #f2cfb5 0%, #ecc6a8 12%, #e8bfa2 25%, #e3b692 45%, #dcaa82 65%, #d49f75 80%, #cc9468 95%, #c48a5e 100%);
+            border-radius:55px 60px 50px 55px; bottom:40px; left:50px;
+            box-shadow:inset -9px -12px 24px rgba(0,0,0,0.09), inset 7px -6px 18px rgba(0,0,0,0.05), 0 4px 18px rgba(0,0,0,0.16); z-index:1;
         }
         .palm::before {
-            content: '';
-            position: absolute;
-            top: 16px;
-            left: 28px;
-            width: 140px;
-            height: 28px;
-            background:
-                radial-gradient(ellipse at 25% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.04) 0%, transparent 45%),
-                radial-gradient(ellipse at 75% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 48%);
-            border-radius: 50%;
-            filter: blur(5px);
-            pointer-events: none;
+            content:''; position:absolute; top:16px; left:28px; width:140px; height:28px;
+            background:radial-gradient(ellipse at 25% 50%, rgba(0,0,0,0.05) 0%, transparent 50%),
+                       radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.04) 0%, transparent 45%),
+                       radial-gradient(ellipse at 75% 50%, rgba(0,0,0,0.05) 0%, transparent 48%);
+            border-radius:50%; filter:blur(5px); pointer-events:none;
         }
-
         .vein {
-            position: absolute;
-            z-index: 2;
-            pointer-events: none;
-            border-radius: 50%;
-            filter: blur(3px);
+            position:absolute; z-index:2; pointer-events:none; border-radius:50%; filter:blur(3px);
         }
-        .vein-1 {
-            width: 50px;
-            height: 3px;
-            background: rgba(100, 140, 170, 0.10);
-            bottom: 115px;
-            left: 100px;
-            transform: rotate(-14deg);
-        }
-        .vein-2 {
-            width: 36px;
-            height: 2px;
-            background: rgba(90, 130, 160, 0.08);
-            bottom: 105px;
-            left: 125px;
-            transform: rotate(-7deg);
-        }
+        .vein-1 { width:50px; height:3px; background:rgba(100,140,170,0.10); bottom:115px; left:100px; transform:rotate(-14deg); }
+        .vein-2 { width:36px; height:2px; background:rgba(90,130,160,0.08); bottom:105px; left:125px; transform:rotate(-7deg); }
 
         /* ============ FINGERS ============ */
         .finger {
-            position: absolute;
-            background: linear-gradient(180deg,
-                    #ecc6a8 0%, #e8bfa2 18%, #e3b692 40%,
-                    #dcaa82 60%, #d49f75 78%, #c8946a 95%);
-            border-radius: 16px 16px 11px 11px;
-            z-index: 2;
-            box-shadow: inset -3px 0 10px rgba(0, 0, 0, 0.05),
-                inset 2px 0 8px rgba(0, 0, 0, 0.03),
-                0 2px 6px rgba(0, 0, 0, 0.08);
+            position:absolute;
+            background:linear-gradient(180deg, #ecc6a8 0%, #e8bfa2 18%, #e3b692 40%, #dcaa82 60%, #d49f75 78%, #c8946a 95%);
+            border-radius:16px 16px 11px 11px; z-index:2;
+            box-shadow:inset -3px 0 10px rgba(0,0,0,0.05), inset 2px 0 8px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.08);
         }
         .finger::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 62%;
-            height: 1.5px;
-            background: rgba(0, 0, 0, 0.06);
-            border-radius: 1px;
-            z-index: 5;
-            pointer-events: none;
+            content:''; position:absolute; left:50%; transform:translateX(-50%);
+            width:62%; height:1.5px; background:rgba(0,0,0,0.06); border-radius:1px; z-index:5; pointer-events:none;
         }
         .finger::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 74%;
-            height: 28px;
-            background: linear-gradient(180deg,
-                    #7a1828 0%, #5c0f1c 30%, #4a0b14 55%,
-                    #3d0812 80%, #350710 100%);
-            border-radius: 3px 3px 8px 8px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45),
-                inset 0 1px 0 rgba(255, 200, 210, 0.14),
-                inset 0 -1px 2px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            content:''; position:absolute; top:2px; left:50%; transform:translateX(-50%);
+            width:74%; height:28px;
+            background:linear-gradient(180deg, #7a1828 0%, #5c0f1c 30%, #4a0b14 55%, #3d0812 80%, #350710 100%);
+            border-radius:3px 3px 8px 8px;
+            box-shadow:0 1px 4px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,200,210,0.14), inset 0 -1px 2px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.2);
+            z-index:10;
         }
         .nail-gloss {
-            position: absolute;
-            top: 3px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 28%;
-            height: 8px;
-            background: var(--nail-gloss);
-            border-radius: 2px;
-            z-index: 11;
-            pointer-events: none;
+            position:absolute; top:3px; left:50%; transform:translateX(-50%);
+            width:28%; height:8px; background:var(--nail-gloss); border-radius:2px; z-index:11; pointer-events:none;
         }
 
-        .finger-index {
-            width: 54px;
-            height: 168px;
-            bottom: 178px;
-            left: 68px;
-            transform: rotate(-5deg);
-        }
-        .finger-index::before {
-            top: 50px;
-        }
-        .finger-index::after {
-            height: 30px;
-        }
+        .finger-index { width:54px; height:168px; bottom:178px; left:68px; transform:rotate(-5deg); }
+        .finger-index::before { top:50px; }
+        .finger-index::after { height:30px; }
 
-        .finger-middle {
-            width: 56px;
-            height: 192px;
-            bottom: 190px;
-            left: 128px;
-            transform: rotate(0deg);
-        }
-        .finger-middle::before {
-            top: 58px;
-        }
-        .finger-middle::after {
-            height: 32px;
-        }
+        .finger-middle { width:56px; height:192px; bottom:190px; left:128px; transform:rotate(0deg); }
+        .finger-middle::before { top:58px; }
+        .finger-middle::after { height:32px; }
 
-        .finger-ring {
-            width: 50px;
-            height: 172px;
-            bottom: 182px;
-            left: 190px;
-            transform: rotate(5deg);
-        }
-        .finger-ring::before {
-            top: 52px;
-        }
-        .finger-ring::after {
-            height: 30px;
-        }
+        .finger-ring { width:50px; height:172px; bottom:182px; left:190px; transform:rotate(5deg); }
+        .finger-ring::before { top:52px; }
+        .finger-ring::after { height:30px; }
 
-        .finger-pinky {
-            width: 42px;
-            height: 140px;
-            bottom: 158px;
-            left: 248px;
-            transform: rotate(12deg);
-        }
-        .finger-pinky::before {
-            top: 42px;
-        }
-        .finger-pinky::after {
-            height: 25px;
-            width: 70%;
-        }
+        .finger-pinky { width:42px; height:140px; bottom:158px; left:248px; transform:rotate(12deg); }
+        .finger-pinky::before { top:42px; }
+        .finger-pinky::after { height:25px; width:70%; }
 
-        .finger-thumb {
-            width: 58px;
-            height: 128px;
-            bottom: 60px;
-            left: 5px;
-            transform: rotate(-40deg);
-            border-radius: 20px 20px 13px 13px;
-            z-index: 0;
-            background: linear-gradient(180deg,
-                    #e8bfa2 0%, #e3b692 30%, #d49f75 60%, #c48a5e 100%);
+        .finger-thumb { width:58px; height:128px; bottom:60px; left:5px; transform:rotate(-40deg);
+            border-radius:20px 20px 13px 13px; z-index:0;
+            background:linear-gradient(180deg, #e8bfa2 0%, #e3b692 30%, #d49f75 60%, #c48a5e 100%);
         }
-        .finger-thumb::before {
-            top: 38px;
-            width: 58%;
-        }
-        .finger-thumb::after {
-            height: 25px;
-            width: 72%;
-        }
+        .finger-thumb::before { top:38px; width:58%; }
+        .finger-thumb::after { height:25px; width:72%; }
 
-        /* ============ GOLD CHAIN RING ============ */
+        /* ============ GOLD RING ============ */
         .gold-ring {
-            position: absolute;
-            width: 44px;
-            height: 11px;
-            bottom: 158px;
-            left: 193px;
-            transform: rotate(5deg);
-            z-index: 15;
-            pointer-events: none;
-            background: repeating-linear-gradient(90deg,
-                    transparent 0px, transparent 1px,
-                    var(--gold-md) 1px, var(--gold-md) 2.5px,
-                    var(--gold-lt) 2.5px, var(--gold-lt) 3.5px,
-                    var(--gold-dk) 3.5px, var(--gold-dk) 5px,
-                    var(--gold-lt) 5px, var(--gold-lt) 6px,
-                    var(--gold-md) 6px, var(--gold-md) 7.5px,
-                    transparent 7.5px, transparent 8.5px);
-            border-radius: 50%;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55),
-                0 0 6px rgba(200, 160, 50, 0.5),
-                inset 0 1px 1px rgba(255, 255, 255, 0.35);
+            position:absolute; width:44px; height:11px; bottom:158px; left:193px; transform:rotate(5deg);
+            z-index:15; pointer-events:none;
+            background:repeating-linear-gradient(90deg, transparent 0px, transparent 1px,
+                        var(--gold-md) 1px, var(--gold-md) 2.5px, var(--gold-lt) 2.5px, var(--gold-lt) 3.5px,
+                        var(--gold-dk) 3.5px, var(--gold-dk) 5px, var(--gold-lt) 5px, var(--gold-lt) 6px,
+                        var(--gold-md) 6px, var(--gold-md) 7.5px, transparent 7.5px, transparent 8.5px);
+            border-radius:50%;
+            box-shadow:0 1px 3px rgba(0,0,0,0.55), 0 0 6px rgba(200,160,50,0.5), inset 0 1px 1px rgba(255,255,255,0.35);
         }
         .gold-ring::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 5px;
-            width: 34px;
-            height: 2px;
-            background: rgba(255, 240, 210, 0.4);
-            border-radius: 50%;
-            pointer-events: none;
+            content:''; position:absolute; top:2px; left:5px; width:34px; height:2px;
+            background:rgba(255,240,210,0.4); border-radius:50%; pointer-events:none;
         }
 
-        /* ============ BOY CHARACTER ============ */
+        /* ============ BOY ============ */
         .boy {
-            position: absolute;
-            width: 175px;
-            height: 260px;
-            right: -220px;
-            top: 75px;
-            z-index: 10;
-            animation: boy-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
+            position:absolute; width:175px; height:260px;
+            right:-220px; top:75px; z-index:10;
+            animation:boy-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
         }
-
         .boy-body {
-            position: absolute;
-            width: 100px;
-            height: 135px;
-            background: linear-gradient(178deg,
-                    #355c8a 0%, #2a4a72 30%, #1e3a5f 65%, #182f4d 100%);
-            border-radius: 22px 22px 11px 11px;
-            bottom: 0;
-            left: 38px;
-            box-shadow: inset -4px 0 14px rgba(0, 0, 0, 0.25),
-                inset 3px 0 10px rgba(0, 0, 0, 0.12),
-                0 3px 10px rgba(0, 0, 0, 0.3);
-            z-index: 1;
+            position:absolute; width:100px; height:135px;
+            background:linear-gradient(178deg, #355c8a 0%, #2a4a72 30%, #1e3a5f 65%, #182f4d 100%);
+            border-radius:22px 22px 11px 11px; bottom:0; left:38px;
+            box-shadow:inset -4px 0 14px rgba(0,0,0,0.25), inset 3px 0 10px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.3);
+            z-index:1;
         }
         .boy-body::before {
-            content: '';
-            position: absolute;
-            top: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 18px;
-            background: linear-gradient(180deg, #4a7ab5 0%, #3a6295 100%);
-            border-radius: 9px 9px 2px 2px;
-            z-index: 2;
+            content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%);
+            width:50px; height:18px; background:linear-gradient(180deg, #4a7ab5 0%, #3a6295 100%);
+            border-radius:9px 9px 2px 2px; z-index:2;
         }
-
         .boy-head-container {
-            position: absolute;
-            width: 100px;
-            height: 108px;
-            top: 4px;
-            left: 38px;
-            z-index: 3;
-            transform-origin: 50% 90%;
-            animation: head-tilt-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
+            position:absolute; width:100px; height:108px; top:4px; left:38px; z-index:3;
+            transform-origin:50% 90%;
+            animation:head-tilt-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
         }
-
         .boy-head {
-            position: absolute;
-            width: 96px;
-            height: 98px;
-            background: linear-gradient(175deg,
-                    #f5d0aa 0%, #f0c8a0 20%, #e8b88a 50%,
-                    #dca878 72%, #d09a68 100%);
-            border-radius: 48% 48% 46% 46% / 50% 50% 44% 44%;
-            top: 3px;
-            left: 2px;
-            box-shadow: inset -6px -5px 16px rgba(0, 0, 0, 0.10),
-                inset 4px -3px 12px rgba(0, 0, 0, 0.06),
-                0 3px 10px rgba(0, 0, 0, 0.25);
-            z-index: 2;
+            position:absolute; width:96px; height:98px;
+            background:linear-gradient(175deg, #f5d0aa 0%, #f0c8a0 20%, #e8b88a 50%, #dca878 72%, #d09a68 100%);
+            border-radius:48% 48% 46% 46% / 50% 50% 44% 44%; top:3px; left:2px;
+            box-shadow:inset -6px -5px 16px rgba(0,0,0,0.10), inset 4px -3px 12px rgba(0,0,0,0.06), 0 3px 10px rgba(0,0,0,0.25);
+            z-index:2;
         }
-
         .boy-hair {
-            position: absolute;
-            width: 106px;
-            height: 56px;
-            background: linear-gradient(180deg, #3d2010 0%, #2c1808 55%, #1a0d04 100%);
-            border-radius: 50px 50px 10px 10px;
-            top: -8px;
-            left: -3px;
-            z-index: 4;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+            position:absolute; width:106px; height:56px;
+            background:linear-gradient(180deg, #3d2010 0%, #2c1808 55%, #1a0d04 100%);
+            border-radius:50px 50px 10px 10px; top:-8px; left:-3px; z-index:4;
+            box-shadow:0 2px 5px rgba(0,0,0,0.35);
         }
-        .boy-hair::before {
-            content: '';
-            position: absolute;
-            width: 26px;
-            height: 18px;
-            background: var(--boy-hair-hi);
-            border-radius: 50%;
-            top: -6px;
-            left: 20px;
-            opacity: 0.7;
-        }
-        .boy-hair::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 14px;
-            background: var(--boy-hair-hi);
-            border-radius: 50%;
-            top: -3px;
-            left: 55px;
-            opacity: 0.6;
-        }
-        .hair-tuft {
-            position: absolute;
-            z-index: 5;
-            background: #2c1808;
-            border-radius: 50%;
-        }
-        .hair-tuft-left {
-            width: 16px;
-            height: 12px;
-            top: 10px;
-            left: -7px;
-            transform: rotate(-20deg);
-        }
-        .hair-tuft-right {
-            width: 14px;
-            height: 10px;
-            top: 12px;
-            right: -5px;
-            transform: rotate(15deg);
-        }
+        .boy-hair::before { content:''; position:absolute; width:26px; height:18px; background:var(--boy-hair-hi); border-radius:50%; top:-6px; left:20px; opacity:0.7; }
+        .boy-hair::after { content:''; position:absolute; width:18px; height:14px; background:var(--boy-hair-hi); border-radius:50%; top:-3px; left:55px; opacity:0.6; }
+        .hair-tuft { position:absolute; z-index:5; background:#2c1808; border-radius:50%; }
+        .hair-tuft-left { width:16px; height:12px; top:10px; left:-7px; transform:rotate(-20deg); }
+        .hair-tuft-right { width:14px; height:10px; top:12px; right:-5px; transform:rotate(15deg); }
 
         .eye {
-            position: absolute;
-            width: 20px;
-            height: 15px;
-            background: #fefefe;
-            border-radius: 50%;
-            top: 35px;
-            z-index: 6;
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08),
-                inset 0 1px 2px rgba(0, 0, 0, 0.04);
-            overflow: visible;
+            position:absolute; width:20px; height:15px; background:#fefefe; border-radius:50%;
+            top:35px; z-index:6;
+            box-shadow:0 0 0 1px rgba(0,0,0,0.08), inset 0 1px 2px rgba(0,0,0,0.04);
+            overflow:visible;
         }
-        .eye-left {
-            left: 20px;
-        }
-        .eye-right {
-            right: 20px;
-        }
+        .eye-left { left:20px; } .eye-right { right:20px; }
         .eye::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 6px;
-            background: rgba(200, 150, 120, 0.4);
-            border-radius: 50% 50% 0 0;
-            top: -3px;
-            left: 0;
-            z-index: 8;
+            content:''; position:absolute; width:100%; height:6px;
+            background:rgba(200,150,120,0.4); border-radius:50% 50% 0 0; top:-3px; left:0; z-index:8;
         }
         .pupil {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: radial-gradient(circle at 35% 30%, #4a4a4a 0%, #1a1a1a 65%, #000 100%);
-            border-radius: 50%;
-            top: 2px;
-            left: 1px;
-            z-index: 7;
+            position:absolute; width:12px; height:12px;
+            background:radial-gradient(circle at 35% 30%, #4a4a4a 0%, #1a1a1a 65%, #000 100%);
+            border-radius:50%; top:2px; left:1px; z-index:7;
         }
-        .pupil::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #fff;
-            border-radius: 50%;
-            top: 1px;
-            left: 1.5px;
-            z-index: 9;
-        }
-        .eye-sparkle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 50%;
-            top: 1px;
-            z-index: 9;
-            pointer-events: none;
-        }
-        .eye-left .eye-sparkle {
-            left: 7px;
-        }
-        .eye-right .eye-sparkle {
-            left: 7px;
-        }
+        .pupil::after { content:''; position:absolute; width:4px; height:4px; background:#fff; border-radius:50%; top:1px; left:1.5px; z-index:9; }
+        .eye-sparkle { position:absolute; width:3px; height:3px; background:rgba(255,255,255,0.85); border-radius:50%; top:1px; z-index:9; pointer-events:none; }
+        .eye-left .eye-sparkle { left:7px; } .eye-right .eye-sparkle { left:7px; }
 
         .blush {
-            position: absolute;
-            width: 18px;
-            height: 10px;
-            background: rgba(235, 140, 145, 0.28);
-            border-radius: 50%;
-            top: 48px;
-            z-index: 5;
-            filter: blur(4px);
+            position:absolute; width:18px; height:10px; background:rgba(235,140,145,0.28);
+            border-radius:50%; top:48px; z-index:5; filter:blur(4px);
         }
-        .blush-left {
-            left: 8px;
-        }
-        .blush-right {
-            right: 8px;
-        }
-
+        .blush-left { left:8px; } .blush-right { right:8px; }
         .nose {
-            position: absolute;
-            width: 11px;
-            height: 7px;
-            background: rgba(0, 0, 0, 0.06);
-            border-radius: 50%;
-            top: 52px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 6;
+            position:absolute; width:11px; height:7px; background:rgba(0,0,0,0.06);
+            border-radius:50%; top:52px; left:50%; transform:translateX(-50%); z-index:6;
         }
-
         .mouth {
-            position: absolute;
-            width: 20px;
-            height: 14px;
-            background: #d48085;
-            border-radius: 50%;
-            top: 63px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 6;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: mouth-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
+            position:absolute; width:20px; height:14px; background:#d48085; border-radius:50%;
+            top:63px; left:50%; transform:translateX(-50%); z-index:6;
+            box-shadow:inset 0 2px 4px rgba(0,0,0,0.2);
+            animation:mouth-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
         }
-
         .boy-arm {
-            position: absolute;
-            width: 90px;
-            height: 28px;
-            background: linear-gradient(180deg,
-                    #f0c8a0 0%, #e8b88a 40%, #dca878 75%, #d09a68 100%);
-            border-radius: 15px;
-            top: 112px;
-            left: -52px;
-            z-index: 0;
-            transform-origin: right center;
-            animation: arm-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+            position:absolute; width:90px; height:28px;
+            background:linear-gradient(180deg, #f0c8a0 0%, #e8b88a 40%, #dca878 75%, #d09a68 100%);
+            border-radius:15px; top:112px; left:-52px; z-index:0;
+            transform-origin:right center;
+            animation:arm-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
+            box-shadow:0 2px 5px rgba(0,0,0,0.12);
         }
         .boy-hand-small {
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            background: radial-gradient(circle at 55% 40%, #f0c8a0 0%, #dca878 100%);
-            border-radius: 50%;
-            left: -20px;
-            top: -2px;
-            box-shadow: inset -2px -1px 6px rgba(0, 0, 0, 0.08),
-                0 1px 3px rgba(0, 0, 0, 0.1);
+            position:absolute; width:32px; height:32px;
+            background:radial-gradient(circle at 55% 40%, #f0c8a0 0%, #dca878 100%);
+            border-radius:50%; left:-20px; top:-2px;
+            box-shadow:inset -2px -1px 6px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        /* ============ KISS GLOWS ============ */
+        /* ============ KISS GLOWS (now precisely on fingertips) ============ */
         .kiss-glow {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9;
-            opacity: 0;
-            background: radial-gradient(circle,
-                    rgba(255, 175, 190, 0.6) 0%,
-                    rgba(255, 140, 165, 0.25) 30%,
-                    transparent 70%);
-            animation: glow-pop var(--cycle) ease-in-out infinite;
+            position:absolute; width:40px; height:40px; border-radius:50%;
+            pointer-events:none; z-index:9; opacity:0;
+            background:radial-gradient(circle, rgba(255,175,190,0.6) 0%, rgba(255,140,165,0.25) 30%, transparent 70%);
+            animation:glow-pop var(--cycle) ease-in-out infinite;
         }
-        .glow-pinky {
-            top: 48px;
-            left: 310px;
-            animation-delay: 1.8s;
-        }
-        .glow-ring {
-            top: 42px;
-            left: 260px;
-            animation-delay: 4.6s;
-        }
-        .glow-middle {
-            top: 36px;
-            left: 205px;
-            animation-delay: 7.4s;
-        }
-        .glow-index {
-            top: 40px;
-            left: 148px;
-            animation-delay: 10.2s;
-        }
-        .glow-thumb {
-            top: 95px;
-            left: 82px;
-            animation-delay: 13.0s;
-        }
+        /* Positions derived from actual fingertip coordinates */
+        .glow-pinky { top:100px; left:324px; animation-delay:1.8s; }
+        .glow-ring  { top:44px;  left:270px; animation-delay:4.6s; }
+        .glow-middle{ top:16px;  left:211px; animation-delay:7.4s; }
+        .glow-index { top:52px;  left:150px; animation-delay:10.2s; }
+        .glow-thumb { top:210px; left:89px;  animation-delay:13.0s; }
 
         @keyframes glow-pop {
-            0%,
-            98% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            99% {
-                opacity: 0.85;
-                transform: scale(3.0);
-            }
-            99.5% {
-                opacity: 0.35;
-                transform: scale(2.2);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(4.5);
-            }
+            0%,98%{ opacity:0; transform:scale(0.3); }
+            99%{ opacity:0.85; transform:scale(3.0); }
+            99.5%{ opacity:0.35; transform:scale(2.2); }
+            100%{ opacity:0; transform:scale(4.5); }
         }
 
         /* ============ HEARTS ============ */
         .heart-container {
-            position: absolute;
-            z-index: 20;
-            pointer-events: none;
-            opacity: 0;
-            animation: heart-rise var(--cycle) ease-in-out infinite;
+            position:absolute; z-index:20; pointer-events:none; opacity:0;
+            animation:heart-rise var(--cycle) ease-in-out infinite;
         }
-        .heart-pinky {
-            top: 40px;
-            left: 320px;
-            animation-delay: 1.9s;
-        }
-        .heart-ring {
-            top: 34px;
-            left: 270px;
-            animation-delay: 4.7s;
-        }
-        .heart-middle {
-            top: 28px;
-            left: 215px;
-            animation-delay: 7.5s;
-        }
-        .heart-index {
-            top: 32px;
-            left: 158px;
-            animation-delay: 10.3s;
-        }
-        .heart-thumb {
-            top: 87px;
-            left: 92px;
-            animation-delay: 13.1s;
-        }
+        .heart-pinky { top:90px; left:334px; animation-delay:1.9s; }
+        .heart-ring  { top:34px; left:280px; animation-delay:4.7s; }
+        .heart-middle{ top:6px;  left:221px; animation-delay:7.5s; }
+        .heart-index { top:42px; left:160px; animation-delay:10.3s; }
+        .heart-thumb { top:200px;left:99px; animation-delay:13.1s; }
 
         .heart-shape {
-            position: relative;
-            width: 28px;
-            height: 26px;
-            filter: drop-shadow(0 2px 4px rgba(200, 70, 90, 0.5));
+            position:relative; width:28px; height:26px;
+            filter:drop-shadow(0 2px 4px rgba(200,70,90,0.5));
         }
-        .heart-shape::before,
-        .heart-shape::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 24px;
-            background: linear-gradient(180deg, #f07085 0%, #e04560 100%);
-            border-radius: 16px 16px 0 0;
-            top: 0;
+        .heart-shape::before, .heart-shape::after {
+            content:''; position:absolute; width:16px; height:24px;
+            background:linear-gradient(180deg, #f07085 0%, #e04560 100%);
+            border-radius:16px 16px 0 0; top:0;
         }
-        .heart-shape::before {
-            left: 8px;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-        .heart-shape::after {
-            left: 4px;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
+        .heart-shape::before { left:8px; transform:rotate(-45deg); transform-origin:0 100%; }
+        .heart-shape::after  { left:4px; transform:rotate(45deg);  transform-origin:100% 100%; }
 
         @keyframes heart-rise {
-            0%,
-            98% {
-                opacity: 0;
-                transform: scale(0.1) translateY(0);
-            }
-            98.5% {
-                opacity: 1;
-                transform: scale(1.5) translateY(-6px);
-            }
-            99.3% {
-                opacity: 0.8;
-                transform: scale(1.1) translateY(-16px);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.85) translateY(-28px);
-            }
+            0%,98%{ opacity:0; transform:scale(0.1) translateY(0); }
+            98.5%{ opacity:1; transform:scale(1.5) translateY(-6px); }
+            99.3%{ opacity:0.8; transform:scale(1.1) translateY(-16px); }
+            100%{ opacity:0; transform:scale(0.85) translateY(-28px); }
         }
 
-        /* ============ BOY POSITION CYCLE ============ */
+        /* ============ ANIMATION KEYFRAMES (corrected positions) ============ */
         @keyframes boy-cycle {
-            0% {
-                right: -220px;
-                top: 75px;
-            }
-            3% {
-                right: -220px;
-                top: 75px;
-            }
-            6% {
-                right: 280px;
-                top: -8px;
-            }
-            10% {
-                right: 290px;
-                top: -10px;
-            }
-            13% {
-                right: 290px;
-                top: -10px;
-            }
-            16% {
-                right: 310px;
-                top: -14px;
-            }
-            20% {
-                right: 325px;
-                top: -16px;
-            }
-            23% {
-                right: 325px;
-                top: -16px;
-            }
-            26% {
-                right: 350px;
-                top: -20px;
-            }
-            30% {
-                right: 365px;
-                top: -22px;
-            }
-            33% {
-                right: 365px;
-                top: -22px;
-            }
-            36% {
-                right: 395px;
-                top: -18px;
-            }
-            40% {
-                right: 415px;
-                top: -14px;
-            }
-            43% {
-                right: 415px;
-                top: -14px;
-            }
-            46% {
-                right: 445px;
-                top: -8px;
-            }
-            50% {
-                right: 465px;
-                top: -2px;
-            }
-            53% {
-                right: 465px;
-                top: -2px;
-            }
-            56% {
-                right: 500px;
-                top: 15px;
-            }
-            60% {
-                right: 525px;
-                top: 35px;
-            }
-            63% {
-                right: 525px;
-                top: 35px;
-            }
-            68% {
-                right: 460px;
-                top: 10px;
-            }
-            74% {
-                right: 350px;
-                top: 20px;
-            }
-            82% {
-                right: 120px;
-                top: 45px;
-            }
-            90% {
-                right: -80px;
-                top: 60px;
-            }
-            96% {
-                right: -220px;
-                top: 75px;
-            }
-            100% {
-                right: -220px;
-                top: 75px;
-            }
+            0%   { right:-220px; top:75px; }
+            3%   { right:-220px; top:75px; }
+            /* approach pinky */
+            6%   { right:290px; top:20px; }
+            10%  { right:290px; top:20px; }   /* kiss pinky */
+            13%  { right:290px; top:20px; }
+            /* move to ring */
+            16%  { right:325px; top:-10px; }
+            20%  { right:325px; top:-36px; }  /* kiss ring */
+            23%  { right:325px; top:-36px; }
+            /* move to middle */
+            26%  { right:370px; top:-36px; }
+            30%  { right:370px; top:-64px; }  /* kiss middle */
+            33%  { right:370px; top:-64px; }
+            /* move to index */
+            36%  { right:420px; top:-40px; }
+            40%  { right:420px; top:-28px; }  /* kiss index */
+            43%  { right:420px; top:-28px; }
+            /* move to thumb */
+            46%  { right:470px; top:20px; }
+            50%  { right:470px; top:130px; }  /* kiss thumb */
+            53%  { right:470px; top:130px; }
+            /* exit */
+            56%  { right:500px; top:90px; }
+            60%  { right:550px; top:40px; }
+            68%  { right:400px; top:50px; }
+            74%  { right:200px; top:60px; }
+            82%  { right:50px;  top:68px; }
+            90%  { right:-100px; top:73px; }
+            96%  { right:-220px; top:75px; }
+            100% { right:-220px; top:75px; }
         }
 
         @keyframes head-tilt-cycle {
-            0% {
-                transform: rotate(0deg) translateY(0);
-            }
-            3% {
-                transform: rotate(0deg) translateY(0);
-            }
-            6% {
-                transform: rotate(-5deg) translateY(3px);
-            }
-            10% {
-                transform: rotate(-28deg) translateY(16px);
-            }
-            13% {
-                transform: rotate(-28deg) translateY(16px);
-            }
-            16% {
-                transform: rotate(-5deg) translateY(4px);
-            }
-            20% {
-                transform: rotate(-30deg) translateY(18px);
-            }
-            23% {
-                transform: rotate(-30deg) translateY(18px);
-            }
-            26% {
-                transform: rotate(-5deg) translateY(4px);
-            }
-            30% {
-                transform: rotate(-30deg) translateY(18px);
-            }
-            33% {
-                transform: rotate(-30deg) translateY(18px);
-            }
-            36% {
-                transform: rotate(-5deg) translateY(4px);
-            }
-            40% {
-                transform: rotate(-30deg) translateY(18px);
-            }
-            43% {
-                transform: rotate(-30deg) translateY(18px);
-            }
-            46% {
-                transform: rotate(-5deg) translateY(4px);
-            }
-            50% {
-                transform: rotate(-32deg) translateY(20px);
-            }
-            53% {
-                transform: rotate(-32deg) translateY(20px);
-            }
-            56% {
-                transform: rotate(-5deg) translateY(5px);
-            }
-            60% {
-                transform: rotate(-34deg) translateY(22px);
-            }
-            63% {
-                transform: rotate(-34deg) translateY(22px);
-            }
-            68% {
-                transform: rotate(-10deg) translateY(8px);
-            }
-            74% {
-                transform: rotate(-3deg) translateY(2px);
-            }
-            82% {
-                transform: rotate(0deg) translateY(0);
-            }
-            100% {
-                transform: rotate(0deg) translateY(0);
-            }
+            0%,3%   { transform:rotate(0deg) translateY(0); }
+            6%,10%,13% { transform:rotate(-28deg) translateY(16px); }
+            16%,20%,23% { transform:rotate(-30deg) translateY(18px); }
+            26%,30%,33% { transform:rotate(-30deg) translateY(18px); }
+            36%,40%,43% { transform:rotate(-30deg) translateY(18px); }
+            46%,50%,53% { transform:rotate(-34deg) translateY(22px); }
+            56%     { transform:rotate(-10deg) translateY(8px); }
+            60%     { transform:rotate(-3deg) translateY(2px); }
+            68%,74%,82%,90%,96%,100% { transform:rotate(0deg) translateY(0); }
         }
 
         @keyframes arm-cycle {
-            0% {
-                transform: rotate(5deg);
-            }
-            3% {
-                transform: rotate(5deg);
-            }
-            6% {
-                transform: rotate(-10deg);
-            }
-            10% {
-                transform: rotate(-42deg);
-            }
-            13% {
-                transform: rotate(-42deg);
-            }
-            16% {
-                transform: rotate(-12deg);
-            }
-            20% {
-                transform: rotate(-44deg);
-            }
-            23% {
-                transform: rotate(-44deg);
-            }
-            26% {
-                transform: rotate(-12deg);
-            }
-            30% {
-                transform: rotate(-44deg);
-            }
-            33% {
-                transform: rotate(-44deg);
-            }
-            36% {
-                transform: rotate(-12deg);
-            }
-            40% {
-                transform: rotate(-44deg);
-            }
-            43% {
-                transform: rotate(-44deg);
-            }
-            46% {
-                transform: rotate(-12deg);
-            }
-            50% {
-                transform: rotate(-46deg);
-            }
-            53% {
-                transform: rotate(-46deg);
-            }
-            56% {
-                transform: rotate(-14deg);
-            }
-            60% {
-                transform: rotate(-48deg);
-            }
-            63% {
-                transform: rotate(-48deg);
-            }
-            68% {
-                transform: rotate(-20deg);
-            }
-            74% {
-                transform: rotate(-8deg);
-            }
-            82% {
-                transform: rotate(5deg);
-            }
-            100% {
-                transform: rotate(5deg);
-            }
+            0%,3%   { transform:rotate(5deg); }
+            6%,10%,13% { transform:rotate(-42deg); }
+            16%,20%,23% { transform:rotate(-44deg); }
+            26%,30%,33% { transform:rotate(-44deg); }
+            36%,40%,43% { transform:rotate(-44deg); }
+            46%,50%,53% { transform:rotate(-48deg); }
+            56%     { transform:rotate(-20deg); }
+            60%     { transform:rotate(-8deg); }
+            68%,74%,82%,90%,96%,100% { transform:rotate(5deg); }
         }
 
         @keyframes mouth-cycle {
-            0% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
-            3% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
-            8% {
-                width: 13px;
-                height: 10px;
-                border-radius: 50%;
-            }
-            13% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
-            18% {
-                width: 13px;
-                height: 10px;
-                border-radius: 50%;
-            }
-            23% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
-            28% {
-                width: 13px;
-                height: 10px;
-                border-radius: 50%;
-            }
-            33% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
-            38% {
-                width: 13px;
-                height: 10px;
-                border-radius: 50%;
-            }
-            43% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
-            48% {
-                width: 13px;
-                height: 10px;
-                border-radius: 50%;
-            }
-            53% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
-            58% {
-                width: 12px;
-                height: 9px;
-                border-radius: 50%;
-            }
-            63% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
-            100% {
-                width: 20px;
-                height: 14px;
-                border-radius: 50%;
-            }
+            0%,3%   { width:20px; height:14px; border-radius:50%; }
+            8%,18%,28%,38%,48%,58% { width:13px; height:10px; border-radius:50%; }
+            100%    { width:20px; height:14px; border-radius:50%; }
         }
 
         /* ============ RESPONSIVE ============ */
-        @media (max-width: 750px) {
-            .scene {
-                transform: scale(0.68);
-                transform-origin: center center;
-            }
-        }
-        @media (max-width: 500px) {
-            .scene {
-                transform: scale(0.45);
-                transform-origin: center center;
-            }
-        }
-        @media (min-width: 1300px) {
-            .scene {
-                transform: scale(1.15);
-                transform-origin: center center;
-            }
-        }
+        @media (max-width:750px) { .scene { transform:scale(0.68); } }
+        @media (max-width:500px) { .scene { transform:scale(0.45); } }
+        @media (min-width:1300px){ .scene { transform:scale(1.15); } }
     </style>
 </head>
 <body>
     <div class="scene">
-        <!-- Dust motes -->
-        <div class="dust"></div>
-        <div class="dust"></div>
-        <div class="dust"></div>
-        <div class="dust"></div>
-        <div class="dust"></div>
-
-        <!-- Surface -->
+        <div class="dust"></div><div class="dust"></div><div class="dust"></div><div class="dust"></div><div class="dust"></div>
         <div class="surface"></div>
-
-        <!-- Hand shadows -->
         <div class="hand-shadow-soft"></div>
         <div class="hand-shadow-main"></div>
 
-        <!-- Woman's hand -->
         <div class="hand-container">
             <div class="wrist"></div>
             <div class="palm"></div>
-            <div class="vein vein-1"></div>
-            <div class="vein vein-2"></div>
-
+            <div class="vein vein-1"></div><div class="vein vein-2"></div>
             <div class="finger finger-index"><div class="nail-gloss"></div></div>
             <div class="finger finger-middle"><div class="nail-gloss"></div></div>
             <div class="finger finger-ring"><div class="nail-gloss"></div></div>
@@ -1235,21 +440,18 @@
             <div class="gold-ring"></div>
         </div>
 
-        <!-- Kiss glows -->
         <div class="kiss-glow glow-pinky"></div>
         <div class="kiss-glow glow-ring"></div>
         <div class="kiss-glow glow-middle"></div>
         <div class="kiss-glow glow-index"></div>
         <div class="kiss-glow glow-thumb"></div>
 
-        <!-- Hearts -->
         <div class="heart-container heart-pinky"><div class="heart-shape"></div></div>
         <div class="heart-container heart-ring"><div class="heart-shape"></div></div>
         <div class="heart-container heart-middle"><div class="heart-shape"></div></div>
         <div class="heart-container heart-index"><div class="heart-shape"></div></div>
         <div class="heart-container heart-thumb"><div class="heart-shape"></div></div>
 
-        <!-- Boy -->
         <div class="boy">
             <div class="boy-body"></div>
             <div class="boy-arm"><div class="boy-hand-small"></div></div>
@@ -1258,16 +460,9 @@
                     <div class="boy-hair"></div>
                     <div class="hair-tuft hair-tuft-left"></div>
                     <div class="hair-tuft hair-tuft-right"></div>
-                    <div class="eye eye-left">
-                        <div class="pupil"></div>
-                        <div class="eye-sparkle"></div>
-                    </div>
-                    <div class="eye eye-right">
-                        <div class="pupil"></div>
-                        <div class="eye-sparkle"></div>
-                    </div>
-                    <div class="blush blush-left"></div>
-                    <div class="blush blush-right"></div>
+                    <div class="eye eye-left"><div class="pupil"></div><div class="eye-sparkle"></div></div>
+                    <div class="eye eye-right"><div class="pupil"></div><div class="eye-sparkle"></div></div>
+                    <div class="blush blush-left"></div><div class="blush blush-right"></div>
                     <div class="nose"></div>
                     <div class="mouth"></div>
                 </div>
