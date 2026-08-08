@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realistic Hand Kiss Animation</title>
+    <title>Hand Kiss - Every Finger</title>
     <style>
         :root {
-            --bg: #0a0f1a;
+            --bg: #080d18;
             --surface-light: #f5ede4;
             --surface-mid: #e8ddd2;
             --surface-dark: #d9cdbf;
@@ -27,6 +27,7 @@
             --boy-skin-sh: #c8956a;
             --boy-hair: #2c1808;
             --boy-hair-hi: #4a2a12;
+            --cycle: 18s;
         }
 
         * {
@@ -38,9 +39,9 @@
         body {
             background: var(--bg);
             background-image:
-                radial-gradient(ellipse at 30% 40%, rgba(60, 40, 30, 0.2) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 60%, rgba(30, 25, 35, 0.15) 0%, transparent 55%),
-                radial-gradient(ellipse at 50% 20%, rgba(20, 25, 40, 0.25) 0%, transparent 50%);
+                radial-gradient(ellipse at 30% 35%, rgba(60, 40, 30, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 65% 55%, rgba(30, 25, 35, 0.13) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 15%, rgba(20, 25, 40, 0.22) 0%, transparent 45%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -52,74 +53,72 @@
 
         .scene {
             position: relative;
-            width: 580px;
-            height: 480px;
+            width: 700px;
+            height: 540px;
         }
 
-        /* ============ AMBIENT LIGHT PARTICLES ============ */
-        .ambient-dust {
+        /* ============ DUST MOTES ============ */
+        .dust {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 220, 200, 0.5);
             border-radius: 50%;
             pointer-events: none;
             z-index: 0;
-            animation: float-dust 7s ease-in-out infinite;
+            animation: dust-float 8s ease-in-out infinite;
+            background: rgba(255, 220, 200, 0.45);
         }
-        .ambient-dust:nth-child(1) {
-            top: 15%;
-            left: 20%;
+        .dust:nth-child(1) {
+            width: 3px;
+            height: 3px;
+            top: 12%;
+            left: 22%;
             animation-delay: 0s;
-            width: 2.5px;
-            height: 2.5px;
         }
-        .ambient-dust:nth-child(2) {
-            top: 22%;
-            left: 35%;
-            animation-delay: 2.3s;
-            width: 1.8px;
-            height: 1.8px;
-        }
-        .ambient-dust:nth-child(3) {
-            top: 18%;
-            left: 50%;
-            animation-delay: 4.1s;
+        .dust:nth-child(2) {
             width: 2px;
             height: 2px;
+            top: 18%;
+            left: 38%;
+            animation-delay: 2.5s;
         }
-        .ambient-dust:nth-child(4) {
-            top: 28%;
-            left: 42%;
-            animation-delay: 1.5s;
-            width: 1.5px;
-            height: 1.5px;
+        .dust:nth-child(3) {
+            width: 2.5px;
+            height: 2.5px;
+            top: 25%;
+            left: 48%;
+            animation-delay: 4.8s;
         }
-        .ambient-dust:nth-child(5) {
-            top: 12%;
-            left: 28%;
-            animation-delay: 5.2s;
+        .dust:nth-child(4) {
+            width: 1.8px;
+            height: 1.8px;
+            top: 15%;
+            left: 55%;
+            animation-delay: 1.3s;
+        }
+        .dust:nth-child(5) {
             width: 2.2px;
             height: 2.2px;
+            top: 20%;
+            left: 30%;
+            animation-delay: 5.7s;
         }
 
-        @keyframes float-dust {
+        @keyframes dust-float {
             0%,
             100% {
-                opacity: 0.25;
-                transform: translateY(0) translateX(0);
+                opacity: 0.2;
+                transform: translate(0, 0);
             }
             25% {
                 opacity: 0.7;
-                transform: translateY(-14px) translateX(6px);
+                transform: translate(8px, -16px);
             }
             50% {
-                opacity: 0.35;
-                transform: translateY(-6px) translateX(-4px);
+                opacity: 0.3;
+                transform: translate(-5px, -8px);
             }
             75% {
                 opacity: 0.6;
-                transform: translateY(-18px) translateX(3px);
+                transform: translate(4px, -20px);
             }
         }
 
@@ -129,35 +128,28 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 155px;
+            height: 160px;
             background:
-                /* subtle veining */
-                radial-gradient(ellipse at 25% 40%, rgba(180, 160, 140, 0.12) 0%, transparent 35%),
-                radial-gradient(ellipse at 55% 25%, rgba(190, 170, 150, 0.08) 0%, transparent 30%),
-                radial-gradient(ellipse at 70% 50%, rgba(175, 155, 135, 0.10) 0%, transparent 28%),
-                radial-gradient(ellipse at 40% 60%, rgba(185, 165, 145, 0.06) 0%, transparent 40%),
-                /* micro grain */
+                radial-gradient(ellipse at 25% 35%, rgba(180, 160, 140, 0.10) 0%, transparent 35%),
+                radial-gradient(ellipse at 55% 20%, rgba(190, 170, 150, 0.07) 0%, transparent 30%),
+                radial-gradient(ellipse at 70% 45%, rgba(175, 155, 135, 0.09) 0%, transparent 28%),
                 repeating-linear-gradient(0deg,
                     transparent,
                     transparent 2px,
-                    rgba(160, 140, 120, 0.03) 2px,
-                    rgba(160, 140, 120, 0.03) 3px),
+                    rgba(160, 140, 120, 0.025) 2px,
+                    rgba(160, 140, 120, 0.025) 3px),
                 repeating-linear-gradient(90deg,
                     transparent,
                     transparent 2px,
-                    rgba(155, 135, 115, 0.025) 2px,
-                    rgba(155, 135, 115, 0.025) 3px),
-                /* base marble tone */
+                    rgba(155, 135, 115, 0.02) 2px,
+                    rgba(155, 135, 115, 0.02) 3px),
                 linear-gradient(185deg,
                     #f7f0e8 0%, #efe5da 15%, #e9dcd0 35%,
                     #e3d5c7 55%, #ddd0c0 75%, #d8caba 100%);
             border-radius: 0 0 3px 3px;
-            box-shadow:
-                0 -4px 25px rgba(0, 0, 0, 0.55),
-                0 -1px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 -4px 28px rgba(0, 0, 0, 0.55), 0 -1px 3px rgba(0, 0, 0, 0.3);
             z-index: 0;
         }
-
         .surface::after {
             content: '';
             position: absolute;
@@ -166,108 +158,98 @@
             width: 100%;
             height: 100%;
             background:
-                radial-gradient(ellipse at 35% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 60% 35%, rgba(255, 255, 255, 0.06) 0%, transparent 45%);
+                radial-gradient(ellipse at 35% 18%, rgba(255, 255, 255, 0.09) 0%, transparent 48%),
+                radial-gradient(ellipse at 60% 32%, rgba(255, 255, 255, 0.05) 0%, transparent 42%);
             border-radius: 0 0 3px 3px;
             pointer-events: none;
         }
 
-        /* ============ HAND SHADOW ============ */
+        /* ============ HAND SHADOWS ============ */
         .hand-shadow-main {
             position: absolute;
-            width: 200px;
-            height: 90px;
-            background: rgba(0, 0, 0, 0.22);
+            width: 220px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 50%;
-            bottom: 78px;
-            left: 40px;
+            bottom: 82px;
+            left: 50px;
             z-index: 1;
-            filter: blur(22px);
+            filter: blur(24px);
             transform: rotate(-6deg);
         }
         .hand-shadow-soft {
             position: absolute;
-            width: 240px;
-            height: 110px;
-            background: rgba(0, 0, 0, 0.10);
+            width: 260px;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.09);
             border-radius: 50%;
-            bottom: 72px;
-            left: 30px;
+            bottom: 76px;
+            left: 38px;
             z-index: 1;
-            filter: blur(35px);
+            filter: blur(38px);
             transform: rotate(-5deg);
         }
 
         /* ============ HAND CONTAINER ============ */
         .hand-container {
             position: absolute;
-            width: 230px;
-            height: 290px;
-            left: 50px;
-            top: 28px;
+            width: 310px;
+            height: 380px;
+            left: 55px;
+            top: 18px;
             z-index: 3;
-            transform: rotate(-7deg);
+            transform: rotate(-6deg);
         }
 
-        /* Wrist / Lower forearm */
         .wrist {
             position: absolute;
-            width: 68px;
-            height: 100px;
+            width: 88px;
+            height: 125px;
             background: linear-gradient(178deg,
                     #e8bfa2 0%, #e4b898 15%, #dcaa82 40%,
                     #d49f75 60%, #c8946a 85%, #bf8a60 100%);
-            border-radius: 18px 18px 30px 30px;
-            bottom: -30px;
-            left: 78px;
-            box-shadow:
-                inset -7px 0 18px rgba(0, 0, 0, 0.07),
-                inset 5px 0 14px rgba(0, 0, 0, 0.04),
+            border-radius: 20px 20px 34px 34px;
+            bottom: -38px;
+            left: 105px;
+            box-shadow: inset -7px 0 18px rgba(0, 0, 0, 0.07), inset 5px 0 14px rgba(0, 0, 0, 0.04),
                 0 3px 8px rgba(0, 0, 0, 0.12);
             z-index: 0;
         }
-
-        /* Subtle wrist crease */
         .wrist::after {
             content: '';
             position: absolute;
-            top: 22px;
-            left: 6px;
-            width: 56px;
+            top: 28px;
+            left: 8px;
+            width: 72px;
             height: 2px;
-            background: rgba(0, 0, 0, 0.06);
+            background: rgba(0, 0, 0, 0.05);
             border-radius: 1px;
             filter: blur(2px);
         }
 
-        /* Palm - back of hand */
         .palm {
             position: absolute;
-            width: 148px;
-            height: 135px;
+            width: 195px;
+            height: 175px;
             background: linear-gradient(170deg,
                     #f2cfb5 0%, #ecc6a8 12%, #e8bfa2 25%,
                     #e3b692 45%, #dcaa82 65%, #d49f75 80%,
                     #cc9468 95%, #c48a5e 100%);
-            border-radius: 50px 55px 48px 52px;
-            bottom: 32px;
-            left: 38px;
-            box-shadow:
-                inset -9px -12px 24px rgba(0, 0, 0, 0.09),
+            border-radius: 55px 60px 50px 55px;
+            bottom: 40px;
+            left: 50px;
+            box-shadow: inset -9px -12px 24px rgba(0, 0, 0, 0.09),
                 inset 7px -6px 18px rgba(0, 0, 0, 0.05),
-                inset 0 -2px 8px rgba(0, 0, 0, 0.04),
                 0 4px 18px rgba(0, 0, 0, 0.16);
             z-index: 1;
         }
-
-        /* Metacarpal ridge lines */
         .palm::before {
             content: '';
             position: absolute;
-            top: 12px;
-            left: 20px;
-            width: 108px;
-            height: 22px;
+            top: 16px;
+            left: 28px;
+            width: 140px;
+            height: 28px;
             background:
                 radial-gradient(ellipse at 25% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 50%),
                 radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.04) 0%, transparent 45%),
@@ -277,7 +259,6 @@
             pointer-events: none;
         }
 
-        /* Subtle vein on back of hand */
         .vein {
             position: absolute;
             z-index: 2;
@@ -286,20 +267,20 @@
             filter: blur(3px);
         }
         .vein-1 {
-            width: 38px;
+            width: 50px;
             height: 3px;
-            background: rgba(100, 140, 170, 0.12);
-            bottom: 95px;
-            left: 75px;
-            transform: rotate(-15deg);
+            background: rgba(100, 140, 170, 0.10);
+            bottom: 115px;
+            left: 100px;
+            transform: rotate(-14deg);
         }
         .vein-2 {
-            width: 28px;
+            width: 36px;
             height: 2px;
-            background: rgba(90, 130, 160, 0.10);
-            bottom: 85px;
-            left: 95px;
-            transform: rotate(-8deg);
+            background: rgba(90, 130, 160, 0.08);
+            bottom: 105px;
+            left: 125px;
+            transform: rotate(-7deg);
         }
 
         /* ============ FINGERS ============ */
@@ -308,189 +289,161 @@
             background: linear-gradient(180deg,
                     #ecc6a8 0%, #e8bfa2 18%, #e3b692 40%,
                     #dcaa82 60%, #d49f75 78%, #c8946a 95%);
-            border-radius: 15px 15px 10px 10px;
+            border-radius: 16px 16px 11px 11px;
             z-index: 2;
-            box-shadow:
-                inset -3px 0 10px rgba(0, 0, 0, 0.05),
+            box-shadow: inset -3px 0 10px rgba(0, 0, 0, 0.05),
                 inset 2px 0 8px rgba(0, 0, 0, 0.03),
                 0 2px 6px rgba(0, 0, 0, 0.08);
         }
-
-        /* Joint crease lines */
         .finger::before {
             content: '';
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 65%;
+            width: 62%;
             height: 1.5px;
-            background: rgba(0, 0, 0, 0.07);
+            background: rgba(0, 0, 0, 0.06);
             border-radius: 1px;
             z-index: 5;
             pointer-events: none;
         }
-
-        /* Nail - realistic square shape with cuticle */
         .finger::after {
             content: '';
             position: absolute;
             top: 2px;
             left: 50%;
             transform: translateX(-50%);
-            width: 76%;
-            height: 26px;
+            width: 74%;
+            height: 28px;
             background: linear-gradient(180deg,
                     #7a1828 0%, #5c0f1c 30%, #4a0b14 55%,
                     #3d0812 80%, #350710 100%);
             border-radius: 3px 3px 8px 8px;
-            box-shadow:
-                0 1px 4px rgba(0, 0, 0, 0.45),
-                inset 0 1px 0 rgba(255, 200, 210, 0.15),
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 200, 210, 0.14),
                 inset 0 -1px 2px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba(0, 0, 0, 0.2);
             z-index: 10;
         }
-
-        /* Glossy highlight stripe on nail */
-        .finger .nail-gloss {
+        .nail-gloss {
             position: absolute;
             top: 3px;
             left: 50%;
             transform: translateX(-50%);
-            width: 30%;
-            height: 7px;
+            width: 28%;
+            height: 8px;
             background: var(--nail-gloss);
             border-radius: 2px;
             z-index: 11;
             pointer-events: none;
         }
 
-        /* Individual fingers */
         .finger-index {
-            width: 41px;
-            height: 128px;
-            bottom: 138px;
-            left: 52px;
+            width: 54px;
+            height: 168px;
+            bottom: 178px;
+            left: 68px;
             transform: rotate(-5deg);
-            border-radius: 16px 16px 10px 10px;
         }
         .finger-index::before {
-            top: 38px;
+            top: 50px;
         }
         .finger-index::after {
-            height: 27px;
-            width: 74%;
+            height: 30px;
         }
 
         .finger-middle {
-            width: 43px;
-            height: 148px;
-            bottom: 148px;
-            left: 98px;
+            width: 56px;
+            height: 192px;
+            bottom: 190px;
+            left: 128px;
             transform: rotate(0deg);
-            border-radius: 16px 16px 10px 10px;
         }
         .finger-middle::before {
-            top: 44px;
+            top: 58px;
         }
         .finger-middle::after {
-            height: 29px;
-            width: 76%;
+            height: 32px;
         }
 
         .finger-ring {
-            width: 39px;
-            height: 132px;
-            bottom: 140px;
-            left: 146px;
+            width: 50px;
+            height: 172px;
+            bottom: 182px;
+            left: 190px;
             transform: rotate(5deg);
-            border-radius: 15px 15px 10px 10px;
         }
         .finger-ring::before {
-            top: 40px;
+            top: 52px;
         }
         .finger-ring::after {
-            height: 27px;
-            width: 74%;
+            height: 30px;
         }
 
         .finger-pinky {
-            width: 33px;
-            height: 108px;
-            bottom: 122px;
-            left: 190px;
+            width: 42px;
+            height: 140px;
+            bottom: 158px;
+            left: 248px;
             transform: rotate(12deg);
-            border-radius: 14px 14px 9px 9px;
         }
         .finger-pinky::before {
-            top: 32px;
+            top: 42px;
         }
         .finger-pinky::after {
-            height: 23px;
-            width: 72%;
+            height: 25px;
+            width: 70%;
         }
 
-        /* Thumb */
         .finger-thumb {
-            width: 46px;
-            height: 100px;
-            bottom: 48px;
-            left: 4px;
+            width: 58px;
+            height: 128px;
+            bottom: 60px;
+            left: 5px;
             transform: rotate(-40deg);
-            border-radius: 18px 18px 12px 12px;
+            border-radius: 20px 20px 13px 13px;
             z-index: 0;
             background: linear-gradient(180deg,
                     #e8bfa2 0%, #e3b692 30%, #d49f75 60%, #c48a5e 100%);
         }
         .finger-thumb::before {
-            top: 30px;
-            width: 60%;
+            top: 38px;
+            width: 58%;
         }
         .finger-thumb::after {
-            height: 23px;
-            width: 74%;
+            height: 25px;
+            width: 72%;
         }
 
         /* ============ GOLD CHAIN RING ============ */
         .gold-ring {
             position: absolute;
-            width: 36px;
-            height: 10px;
-            bottom: 122px;
-            left: 147px;
+            width: 44px;
+            height: 11px;
+            bottom: 158px;
+            left: 193px;
             transform: rotate(5deg);
             z-index: 15;
             pointer-events: none;
-            background:
-                /* chain link pattern */
-                repeating-linear-gradient(90deg,
-                    transparent 0px,
-                    transparent 1px,
-                    var(--gold-md) 1px,
-                    var(--gold-md) 2.5px,
-                    var(--gold-lt) 2.5px,
-                    var(--gold-lt) 3.5px,
-                    var(--gold-dk) 3.5px,
-                    var(--gold-dk) 5px,
-                    var(--gold-lt) 5px,
-                    var(--gold-lt) 6px,
-                    var(--gold-md) 6px,
-                    var(--gold-md) 7.5px,
-                    transparent 7.5px,
-                    transparent 8.5px);
+            background: repeating-linear-gradient(90deg,
+                    transparent 0px, transparent 1px,
+                    var(--gold-md) 1px, var(--gold-md) 2.5px,
+                    var(--gold-lt) 2.5px, var(--gold-lt) 3.5px,
+                    var(--gold-dk) 3.5px, var(--gold-dk) 5px,
+                    var(--gold-lt) 5px, var(--gold-lt) 6px,
+                    var(--gold-md) 6px, var(--gold-md) 7.5px,
+                    transparent 7.5px, transparent 8.5px);
             border-radius: 50%;
-            box-shadow:
-                0 1px 3px rgba(0, 0, 0, 0.55),
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55),
                 0 0 6px rgba(200, 160, 50, 0.5),
                 inset 0 1px 1px rgba(255, 255, 255, 0.35);
         }
-
         .gold-ring::after {
             content: '';
             position: absolute;
-            top: 1.5px;
-            left: 4px;
-            width: 28px;
+            top: 2px;
+            left: 5px;
+            width: 34px;
             height: 2px;
             background: rgba(255, 240, 210, 0.4);
             border-radius: 50%;
@@ -500,114 +453,101 @@
         /* ============ BOY CHARACTER ============ */
         .boy {
             position: absolute;
-            width: 140px;
-            height: 210px;
-            right: -190px;
-            top: 88px;
+            width: 175px;
+            height: 260px;
+            right: -220px;
+            top: 75px;
             z-index: 10;
-            animation: boy-approach 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation: boy-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
         }
 
-        /* Boy body */
         .boy-body {
             position: absolute;
-            width: 82px;
-            height: 108px;
+            width: 100px;
+            height: 135px;
             background: linear-gradient(178deg,
                     #355c8a 0%, #2a4a72 30%, #1e3a5f 65%, #182f4d 100%);
-            border-radius: 20px 20px 10px 10px;
+            border-radius: 22px 22px 11px 11px;
             bottom: 0;
-            left: 29px;
-            box-shadow:
-                inset -4px 0 14px rgba(0, 0, 0, 0.25),
+            left: 38px;
+            box-shadow: inset -4px 0 14px rgba(0, 0, 0, 0.25),
                 inset 3px 0 10px rgba(0, 0, 0, 0.12),
                 0 3px 10px rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
-
-        /* Shirt collar */
         .boy-body::before {
             content: '';
             position: absolute;
-            top: 5px;
+            top: 6px;
             left: 50%;
             transform: translateX(-50%);
-            width: 44px;
-            height: 16px;
+            width: 50px;
+            height: 18px;
             background: linear-gradient(180deg, #4a7ab5 0%, #3a6295 100%);
-            border-radius: 8px 8px 2px 2px;
+            border-radius: 9px 9px 2px 2px;
             z-index: 2;
         }
 
-        /* Boy head container */
         .boy-head-container {
             position: absolute;
-            width: 82px;
-            height: 88px;
-            top: 2px;
-            left: 29px;
+            width: 100px;
+            height: 108px;
+            top: 4px;
+            left: 38px;
             z-index: 3;
             transform-origin: 50% 90%;
-            animation: head-tilt-kiss 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation: head-tilt-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
         }
 
-        /* Boy head */
         .boy-head {
             position: absolute;
-            width: 78px;
-            height: 80px;
+            width: 96px;
+            height: 98px;
             background: linear-gradient(175deg,
                     #f5d0aa 0%, #f0c8a0 20%, #e8b88a 50%,
                     #dca878 72%, #d09a68 100%);
             border-radius: 48% 48% 46% 46% / 50% 50% 44% 44%;
-            top: 2px;
+            top: 3px;
             left: 2px;
-            box-shadow:
-                inset -6px -5px 16px rgba(0, 0, 0, 0.10),
+            box-shadow: inset -6px -5px 16px rgba(0, 0, 0, 0.10),
                 inset 4px -3px 12px rgba(0, 0, 0, 0.06),
                 0 3px 10px rgba(0, 0, 0, 0.25);
             z-index: 2;
         }
 
-        /* Hair */
         .boy-hair {
             position: absolute;
-            width: 86px;
-            height: 48px;
-            background: linear-gradient(180deg,
-                    #3d2010 0%, #2c1808 55%, #1a0d04 100%);
-            border-radius: 44px 44px 8px 8px;
-            top: -6px;
-            left: -2px;
+            width: 106px;
+            height: 56px;
+            background: linear-gradient(180deg, #3d2010 0%, #2c1808 55%, #1a0d04 100%);
+            border-radius: 50px 50px 10px 10px;
+            top: -8px;
+            left: -3px;
             z-index: 4;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
         }
-
-        /* Hair texture strands */
         .boy-hair::before {
             content: '';
             position: absolute;
-            width: 22px;
-            height: 16px;
+            width: 26px;
+            height: 18px;
             background: var(--boy-hair-hi);
             border-radius: 50%;
-            top: -5px;
-            left: 16px;
+            top: -6px;
+            left: 20px;
             opacity: 0.7;
         }
         .boy-hair::after {
             content: '';
             position: absolute;
-            width: 16px;
-            height: 12px;
+            width: 18px;
+            height: 14px;
             background: var(--boy-hair-hi);
             border-radius: 50%;
-            top: -2px;
-            left: 44px;
+            top: -3px;
+            left: 55px;
             opacity: 0.6;
         }
-
-        /* Hair side tufts */
         .hair-tuft {
             position: absolute;
             z-index: 5;
@@ -615,84 +555,74 @@
             border-radius: 50%;
         }
         .hair-tuft-left {
-            width: 14px;
-            height: 10px;
-            top: 8px;
-            left: -6px;
+            width: 16px;
+            height: 12px;
+            top: 10px;
+            left: -7px;
             transform: rotate(-20deg);
         }
         .hair-tuft-right {
-            width: 12px;
-            height: 8px;
-            top: 10px;
-            right: -4px;
+            width: 14px;
+            height: 10px;
+            top: 12px;
+            right: -5px;
             transform: rotate(15deg);
         }
 
-        /* Eyes - soft & loving */
         .eye {
             position: absolute;
-            width: 17px;
-            height: 13px;
+            width: 20px;
+            height: 15px;
             background: #fefefe;
             border-radius: 50%;
-            top: 30px;
+            top: 35px;
             z-index: 6;
-            box-shadow:
-                0 0 0 1px rgba(0, 0, 0, 0.08),
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08),
                 inset 0 1px 2px rgba(0, 0, 0, 0.04);
             overflow: visible;
         }
         .eye-left {
-            left: 16px;
+            left: 20px;
         }
         .eye-right {
-            right: 16px;
+            right: 20px;
         }
-
-        /* Upper eyelid for softer expression */
         .eye::before {
             content: '';
             position: absolute;
             width: 100%;
-            height: 5px;
-            background: rgba(200, 150, 120, 0.45);
+            height: 6px;
+            background: rgba(200, 150, 120, 0.4);
             border-radius: 50% 50% 0 0;
-            top: -2px;
+            top: -3px;
             left: 0;
             z-index: 8;
         }
-
-        /* Pupil - looking left toward hand */
         .pupil {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: radial-gradient(circle at 35% 30%, #4a4a4a 0%, #1a1a1a 65%, #000 100%);
             border-radius: 50%;
             top: 2px;
-            left: 2px;
+            left: 1px;
             z-index: 7;
         }
-
-        /* Sparkle in eye */
         .pupil::after {
             content: '';
             position: absolute;
-            width: 3.5px;
-            height: 3.5px;
+            width: 4px;
+            height: 4px;
             background: #fff;
             border-radius: 50%;
             top: 1px;
             left: 1.5px;
             z-index: 9;
         }
-
-        /* Secondary sparkle */
         .eye-sparkle {
             position: absolute;
-            width: 2.5px;
-            height: 2.5px;
+            width: 3px;
+            height: 3px;
             background: rgba(255, 255, 255, 0.85);
             border-radius: 50%;
             top: 1px;
@@ -700,134 +630,194 @@
             pointer-events: none;
         }
         .eye-left .eye-sparkle {
-            left: 6px;
+            left: 7px;
         }
         .eye-right .eye-sparkle {
-            left: 6px;
+            left: 7px;
         }
 
-        /* Blush */
         .blush {
             position: absolute;
-            width: 15px;
-            height: 9px;
-            background: rgba(235, 140, 145, 0.3);
+            width: 18px;
+            height: 10px;
+            background: rgba(235, 140, 145, 0.28);
             border-radius: 50%;
-            top: 40px;
+            top: 48px;
             z-index: 5;
             filter: blur(4px);
         }
         .blush-left {
-            left: 6px;
+            left: 8px;
         }
         .blush-right {
-            right: 6px;
+            right: 8px;
         }
 
-        /* Nose */
         .nose {
             position: absolute;
-            width: 9px;
-            height: 6px;
-            background: rgba(0, 0, 0, 0.07);
-            border-radius: 50%;
-            top: 43px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 6;
-        }
-
-        /* Mouth - puckers for kiss */
-        .mouth {
-            position: absolute;
-            width: 17px;
-            height: 12px;
-            background: #d48085;
+            width: 11px;
+            height: 7px;
+            background: rgba(0, 0, 0, 0.06);
             border-radius: 50%;
             top: 52px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 6;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: mouth-pucker 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
         }
 
-        /* Boy arm */
+        .mouth {
+            position: absolute;
+            width: 20px;
+            height: 14px;
+            background: #d48085;
+            border-radius: 50%;
+            top: 63px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            animation: mouth-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
+        }
+
         .boy-arm {
             position: absolute;
-            width: 78px;
-            height: 24px;
+            width: 90px;
+            height: 28px;
             background: linear-gradient(180deg,
                     #f0c8a0 0%, #e8b88a 40%, #dca878 75%, #d09a68 100%);
-            border-radius: 13px;
-            top: 92px;
-            left: -48px;
+            border-radius: 15px;
+            top: 112px;
+            left: -52px;
             z-index: 0;
             transform-origin: right center;
-            animation: arm-reach 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation: arm-cycle var(--cycle) cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
         }
-
         .boy-hand-small {
             position: absolute;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             background: radial-gradient(circle at 55% 40%, #f0c8a0 0%, #dca878 100%);
             border-radius: 50%;
-            left: -18px;
+            left: -20px;
             top: -2px;
-            box-shadow:
-                inset -2px -1px 6px rgba(0, 0, 0, 0.08),
+            box-shadow: inset -2px -1px 6px rgba(0, 0, 0, 0.08),
                 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        /* ============ KISS GLOW ============ */
+        /* ============ KISS GLOWS ============ */
         .kiss-glow {
             position: absolute;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9;
+            opacity: 0;
             background: radial-gradient(circle,
                     rgba(255, 175, 190, 0.6) 0%,
                     rgba(255, 140, 165, 0.25) 30%,
                     transparent 70%);
-            border-radius: 50%;
-            top: 162px;
-            left: 168px;
-            z-index: 9;
-            opacity: 0;
-            pointer-events: none;
-            animation: glow-pulse 6s ease-in-out forwards;
+            animation: glow-pop var(--cycle) ease-in-out infinite;
+        }
+        .glow-pinky {
+            top: 48px;
+            left: 310px;
+            animation-delay: 1.8s;
+        }
+        .glow-ring {
+            top: 42px;
+            left: 260px;
+            animation-delay: 4.6s;
+        }
+        .glow-middle {
+            top: 36px;
+            left: 205px;
+            animation-delay: 7.4s;
+        }
+        .glow-index {
+            top: 40px;
+            left: 148px;
+            animation-delay: 10.2s;
+        }
+        .glow-thumb {
+            top: 95px;
+            left: 82px;
+            animation-delay: 13.0s;
         }
 
-        /* ============ HEART ============ */
+        @keyframes glow-pop {
+            0%,
+            98% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            99% {
+                opacity: 0.85;
+                transform: scale(3.0);
+            }
+            99.5% {
+                opacity: 0.35;
+                transform: scale(2.2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(4.5);
+            }
+        }
+
+        /* ============ HEARTS ============ */
         .heart-container {
             position: absolute;
-            top: 118px;
-            left: 178px;
             z-index: 20;
-            opacity: 0;
             pointer-events: none;
-            animation: heart-rise 6s ease-in-out forwards;
+            opacity: 0;
+            animation: heart-rise var(--cycle) ease-in-out infinite;
+        }
+        .heart-pinky {
+            top: 40px;
+            left: 320px;
+            animation-delay: 1.9s;
+        }
+        .heart-ring {
+            top: 34px;
+            left: 270px;
+            animation-delay: 4.7s;
+        }
+        .heart-middle {
+            top: 28px;
+            left: 215px;
+            animation-delay: 7.5s;
+        }
+        .heart-index {
+            top: 32px;
+            left: 158px;
+            animation-delay: 10.3s;
+        }
+        .heart-thumb {
+            top: 87px;
+            left: 92px;
+            animation-delay: 13.1s;
         }
 
         .heart-shape {
             position: relative;
-            width: 26px;
-            height: 24px;
+            width: 28px;
+            height: 26px;
             filter: drop-shadow(0 2px 4px rgba(200, 70, 90, 0.5));
         }
         .heart-shape::before,
         .heart-shape::after {
             content: '';
             position: absolute;
-            width: 15px;
-            height: 22px;
+            width: 16px;
+            height: 24px;
             background: linear-gradient(180deg, #f07085 0%, #e04560 100%);
-            border-radius: 15px 15px 0 0;
+            border-radius: 16px 16px 0 0;
             top: 0;
         }
         .heart-shape::before {
-            left: 7px;
+            left: 8px;
             transform: rotate(-45deg);
             transform-origin: 0 100%;
         }
@@ -837,212 +827,391 @@
             transform-origin: 100% 100%;
         }
 
-        /* ============ ANIMATIONS ============ */
-        @keyframes boy-approach {
-            0% {
-                right: -190px;
-                transform: translateY(0) rotate(0deg);
+        @keyframes heart-rise {
+            0%,
+            98% {
+                opacity: 0;
+                transform: scale(0.1) translateY(0);
             }
-            30% {
-                right: 42px;
-                transform: translateY(0) rotate(0deg);
+            98.5% {
+                opacity: 1;
+                transform: scale(1.5) translateY(-6px);
             }
-            42% {
-                right: 34px;
-                transform: translateY(4px) rotate(-2deg);
-            }
-            55% {
-                right: 28px;
-                transform: translateY(10px) rotate(-5deg);
-            }
-            68% {
-                right: 26px;
-                transform: translateY(15px) rotate(-6deg);
-            }
-            82% {
-                right: 26px;
-                transform: translateY(16px) rotate(-6deg);
+            99.3% {
+                opacity: 0.8;
+                transform: scale(1.1) translateY(-16px);
             }
             100% {
-                right: 26px;
-                transform: translateY(16px) rotate(-6deg);
+                opacity: 0;
+                transform: scale(0.85) translateY(-28px);
             }
         }
 
-        @keyframes head-tilt-kiss {
+        /* ============ BOY POSITION CYCLE ============ */
+        @keyframes boy-cycle {
             0% {
-                transform: rotate(0deg) translateY(0);
+                right: -220px;
+                top: 75px;
+            }
+            3% {
+                right: -220px;
+                top: 75px;
+            }
+            6% {
+                right: 280px;
+                top: -8px;
+            }
+            10% {
+                right: 290px;
+                top: -10px;
+            }
+            13% {
+                right: 290px;
+                top: -10px;
+            }
+            16% {
+                right: 310px;
+                top: -14px;
+            }
+            20% {
+                right: 325px;
+                top: -16px;
+            }
+            23% {
+                right: 325px;
+                top: -16px;
+            }
+            26% {
+                right: 350px;
+                top: -20px;
             }
             30% {
-                transform: rotate(0deg) translateY(0);
+                right: 365px;
+                top: -22px;
             }
-            42% {
-                transform: rotate(-10deg) translateY(5px);
+            33% {
+                right: 365px;
+                top: -22px;
             }
-            55% {
-                transform: rotate(-22deg) translateY(12px);
+            36% {
+                right: 395px;
+                top: -18px;
+            }
+            40% {
+                right: 415px;
+                top: -14px;
+            }
+            43% {
+                right: 415px;
+                top: -14px;
+            }
+            46% {
+                right: 445px;
+                top: -8px;
+            }
+            50% {
+                right: 465px;
+                top: -2px;
+            }
+            53% {
+                right: 465px;
+                top: -2px;
+            }
+            56% {
+                right: 500px;
+                top: 15px;
+            }
+            60% {
+                right: 525px;
+                top: 35px;
+            }
+            63% {
+                right: 525px;
+                top: 35px;
             }
             68% {
-                transform: rotate(-30deg) translateY(17px);
+                right: 460px;
+                top: 10px;
+            }
+            74% {
+                right: 350px;
+                top: 20px;
             }
             82% {
-                transform: rotate(-32deg) translateY(18px);
+                right: 120px;
+                top: 45px;
+            }
+            90% {
+                right: -80px;
+                top: 60px;
+            }
+            96% {
+                right: -220px;
+                top: 75px;
             }
             100% {
-                transform: rotate(-32deg) translateY(18px);
+                right: -220px;
+                top: 75px;
             }
         }
 
-        @keyframes arm-reach {
+        @keyframes head-tilt-cycle {
             0% {
-                transform: rotate(8deg);
+                transform: rotate(0deg) translateY(0);
+            }
+            3% {
+                transform: rotate(0deg) translateY(0);
+            }
+            6% {
+                transform: rotate(-5deg) translateY(3px);
+            }
+            10% {
+                transform: rotate(-28deg) translateY(16px);
+            }
+            13% {
+                transform: rotate(-28deg) translateY(16px);
+            }
+            16% {
+                transform: rotate(-5deg) translateY(4px);
+            }
+            20% {
+                transform: rotate(-30deg) translateY(18px);
+            }
+            23% {
+                transform: rotate(-30deg) translateY(18px);
+            }
+            26% {
+                transform: rotate(-5deg) translateY(4px);
             }
             30% {
-                transform: rotate(8deg);
+                transform: rotate(-30deg) translateY(18px);
             }
-            42% {
-                transform: rotate(-15deg);
+            33% {
+                transform: rotate(-30deg) translateY(18px);
             }
-            55% {
-                transform: rotate(-32deg);
+            36% {
+                transform: rotate(-5deg) translateY(4px);
+            }
+            40% {
+                transform: rotate(-30deg) translateY(18px);
+            }
+            43% {
+                transform: rotate(-30deg) translateY(18px);
+            }
+            46% {
+                transform: rotate(-5deg) translateY(4px);
+            }
+            50% {
+                transform: rotate(-32deg) translateY(20px);
+            }
+            53% {
+                transform: rotate(-32deg) translateY(20px);
+            }
+            56% {
+                transform: rotate(-5deg) translateY(5px);
+            }
+            60% {
+                transform: rotate(-34deg) translateY(22px);
+            }
+            63% {
+                transform: rotate(-34deg) translateY(22px);
             }
             68% {
+                transform: rotate(-10deg) translateY(8px);
+            }
+            74% {
+                transform: rotate(-3deg) translateY(2px);
+            }
+            82% {
+                transform: rotate(0deg) translateY(0);
+            }
+            100% {
+                transform: rotate(0deg) translateY(0);
+            }
+        }
+
+        @keyframes arm-cycle {
+            0% {
+                transform: rotate(5deg);
+            }
+            3% {
+                transform: rotate(5deg);
+            }
+            6% {
+                transform: rotate(-10deg);
+            }
+            10% {
                 transform: rotate(-42deg);
             }
-            82% {
+            13% {
+                transform: rotate(-42deg);
+            }
+            16% {
+                transform: rotate(-12deg);
+            }
+            20% {
                 transform: rotate(-44deg);
             }
-            100% {
+            23% {
                 transform: rotate(-44deg);
+            }
+            26% {
+                transform: rotate(-12deg);
+            }
+            30% {
+                transform: rotate(-44deg);
+            }
+            33% {
+                transform: rotate(-44deg);
+            }
+            36% {
+                transform: rotate(-12deg);
+            }
+            40% {
+                transform: rotate(-44deg);
+            }
+            43% {
+                transform: rotate(-44deg);
+            }
+            46% {
+                transform: rotate(-12deg);
+            }
+            50% {
+                transform: rotate(-46deg);
+            }
+            53% {
+                transform: rotate(-46deg);
+            }
+            56% {
+                transform: rotate(-14deg);
+            }
+            60% {
+                transform: rotate(-48deg);
+            }
+            63% {
+                transform: rotate(-48deg);
+            }
+            68% {
+                transform: rotate(-20deg);
+            }
+            74% {
+                transform: rotate(-8deg);
+            }
+            82% {
+                transform: rotate(5deg);
+            }
+            100% {
+                transform: rotate(5deg);
             }
         }
 
-        @keyframes mouth-pucker {
+        @keyframes mouth-cycle {
             0% {
-                width: 17px;
-                height: 12px;
+                width: 20px;
+                height: 14px;
                 border-radius: 50%;
             }
-            30% {
-                width: 17px;
-                height: 12px;
+            3% {
+                width: 20px;
+                height: 14px;
                 border-radius: 50%;
             }
-            42% {
-                width: 14px;
+            8% {
+                width: 13px;
                 height: 10px;
                 border-radius: 50%;
             }
-            55% {
-                width: 11px;
+            13% {
+                width: 20px;
+                height: 14px;
+                border-radius: 50%;
+            }
+            18% {
+                width: 13px;
+                height: 10px;
+                border-radius: 50%;
+            }
+            23% {
+                width: 20px;
+                height: 14px;
+                border-radius: 50%;
+            }
+            28% {
+                width: 13px;
+                height: 10px;
+                border-radius: 50%;
+            }
+            33% {
+                width: 20px;
+                height: 14px;
+                border-radius: 50%;
+            }
+            38% {
+                width: 13px;
+                height: 10px;
+                border-radius: 50%;
+            }
+            43% {
+                width: 20px;
+                height: 14px;
+                border-radius: 50%;
+            }
+            48% {
+                width: 13px;
+                height: 10px;
+                border-radius: 50%;
+            }
+            53% {
+                width: 20px;
+                height: 14px;
+                border-radius: 50%;
+            }
+            58% {
+                width: 12px;
                 height: 9px;
                 border-radius: 50%;
             }
-            68% {
-                width: 10px;
-                height: 8px;
-                border-radius: 50%;
-            }
-            82% {
-                width: 10px;
-                height: 8px;
+            63% {
+                width: 20px;
+                height: 14px;
                 border-radius: 50%;
             }
             100% {
-                width: 10px;
-                height: 8px;
+                width: 20px;
+                height: 14px;
                 border-radius: 50%;
-            }
-        }
-
-        @keyframes glow-pulse {
-            0% {
-                opacity: 0;
-                transform: scale(0.4);
-            }
-            55% {
-                opacity: 0;
-                transform: scale(0.4);
-            }
-            62% {
-                opacity: 0.9;
-                transform: scale(2.8);
-            }
-            70% {
-                opacity: 0.5;
-                transform: scale(2.0);
-            }
-            80% {
-                opacity: 0.2;
-                transform: scale(3.2);
-            }
-            90% {
-                opacity: 0.05;
-                transform: scale(4.0);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(5.0);
-            }
-        }
-
-        @keyframes heart-rise {
-            0% {
-                opacity: 0;
-                transform: scale(0.15) translateY(0);
-            }
-            56% {
-                opacity: 0;
-                transform: scale(0.15) translateY(0);
-            }
-            64% {
-                opacity: 1;
-                transform: scale(1.5) translateY(-8px);
-            }
-            72% {
-                opacity: 0.9;
-                transform: scale(1.15) translateY(-18px);
-            }
-            84% {
-                opacity: 0.65;
-                transform: scale(1.0) translateY(-30px);
-            }
-            95% {
-                opacity: 0.35;
-                transform: scale(0.9) translateY(-38px);
-            }
-            100% {
-                opacity: 0.15;
-                transform: scale(0.85) translateY(-44px);
             }
         }
 
         /* ============ RESPONSIVE ============ */
-        @media (max-width: 640px) {
+        @media (max-width: 750px) {
             .scene {
-                transform: scale(0.72);
+                transform: scale(0.68);
+                transform-origin: center center;
             }
         }
-        @media (max-width: 420px) {
+        @media (max-width: 500px) {
             .scene {
-                transform: scale(0.5);
+                transform: scale(0.45);
+                transform-origin: center center;
             }
         }
-        @media (min-width: 1200px) {
+        @media (min-width: 1300px) {
             .scene {
-                transform: scale(1.1);
+                transform: scale(1.15);
+                transform-origin: center center;
             }
         }
     </style>
 </head>
 <body>
     <div class="scene">
-        <!-- Ambient dust motes -->
-        <div class="ambient-dust"></div>
-        <div class="ambient-dust"></div>
-        <div class="ambient-dust"></div>
-        <div class="ambient-dust"></div>
-        <div class="ambient-dust"></div>
+        <!-- Dust motes -->
+        <div class="dust"></div>
+        <div class="dust"></div>
+        <div class="dust"></div>
+        <div class="dust"></div>
+        <div class="dust"></div>
 
         <!-- Surface -->
         <div class="surface"></div>
@@ -1058,41 +1227,32 @@
             <div class="vein vein-1"></div>
             <div class="vein vein-2"></div>
 
-            <!-- Fingers with nails -->
-            <div class="finger finger-index">
-                <div class="nail-gloss"></div>
-            </div>
-            <div class="finger finger-middle">
-                <div class="nail-gloss"></div>
-            </div>
-            <div class="finger finger-ring">
-                <div class="nail-gloss"></div>
-            </div>
-            <div class="finger finger-pinky">
-                <div class="nail-gloss"></div>
-            </div>
-            <div class="finger finger-thumb">
-                <div class="nail-gloss"></div>
-            </div>
-
-            <!-- Gold chain ring -->
+            <div class="finger finger-index"><div class="nail-gloss"></div></div>
+            <div class="finger finger-middle"><div class="nail-gloss"></div></div>
+            <div class="finger finger-ring"><div class="nail-gloss"></div></div>
+            <div class="finger finger-pinky"><div class="nail-gloss"></div></div>
+            <div class="finger finger-thumb"><div class="nail-gloss"></div></div>
             <div class="gold-ring"></div>
         </div>
 
-        <!-- Kiss glow -->
-        <div class="kiss-glow"></div>
+        <!-- Kiss glows -->
+        <div class="kiss-glow glow-pinky"></div>
+        <div class="kiss-glow glow-ring"></div>
+        <div class="kiss-glow glow-middle"></div>
+        <div class="kiss-glow glow-index"></div>
+        <div class="kiss-glow glow-thumb"></div>
 
-        <!-- Heart -->
-        <div class="heart-container">
-            <div class="heart-shape"></div>
-        </div>
+        <!-- Hearts -->
+        <div class="heart-container heart-pinky"><div class="heart-shape"></div></div>
+        <div class="heart-container heart-ring"><div class="heart-shape"></div></div>
+        <div class="heart-container heart-middle"><div class="heart-shape"></div></div>
+        <div class="heart-container heart-index"><div class="heart-shape"></div></div>
+        <div class="heart-container heart-thumb"><div class="heart-shape"></div></div>
 
-        <!-- Boy character -->
+        <!-- Boy -->
         <div class="boy">
             <div class="boy-body"></div>
-            <div class="boy-arm">
-                <div class="boy-hand-small"></div>
-            </div>
+            <div class="boy-arm"><div class="boy-hand-small"></div></div>
             <div class="boy-head-container">
                 <div class="boy-head">
                     <div class="boy-hair"></div>
